@@ -39,7 +39,7 @@ public function Add(Request $request,ManagerRegistry $doctrine,ValidatorInterfac
         $em->persist($user);
         $em->flush();
         return $this->render('user/login.html.twig', array(
-            'userform'=>$Form->createView(),
+            'loginform'=>$this->createForm(LoginType::class,new User())->createView(),
             'errors'=>array(),
             'message'=>"Presque terminé, Pour finaliser votre inscription à LotusCare, il nous suffit de vérifier votre adresse e-mail. Nous venons d'envoyer un code de confirmation à votre email"
         ));
@@ -100,10 +100,7 @@ public function Login(Request $request,UserRepository $userRepository,ValidatorI
 #[Route('/dashboard/users', name: 'app_users_admin')]
 public function DisplayUsersAdmin(UserRepository $userRepository): Response
 {
-
-
     $users = $userRepository->findAll();
-
     return $this->render('user/display_admin.html.twig', array(
         'users'=>$users,
     ));

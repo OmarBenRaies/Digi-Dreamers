@@ -76,9 +76,9 @@
     <script>
         {% if message is defined %}
             Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: "{{ message }}",
+            icon: 'success',
+            title: 'Verifier votre compte',
+            text: "{{ message|raw }}",
             })
         {% endif %}
 
