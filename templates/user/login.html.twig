@@ -1,0 +1,94 @@
+{% extends 'front/base.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+        .error-message{
+            display: none;
+            color: red;
+        }
+
+        .single-input-fields{
+            margin-bottom: 10px;
+        }
+
+        .input-error{
+            border: 1px solid red !important;
+        }
+    </style>
+{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="login-form-area">
+        {{ form_start(loginform, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="login-form">
+
+            <div class="login-heading">
+                <span>Login</span>
+                <p>Enter Login details to get access</p>
+            </div>
+
+            <div class="input-box">
+
+
+                <div class="single-input-fields">
+                    <label>Email</label>
+                    {{ form_widget(loginform.email, { 'attr' : { 'placeholder':'Email' } }) }}
+                    <p id="error-email" class="error-message"></p>
+                </div>
+
+                <div class="single-input-fields">
+                    <label>Password</label>
+                    {{ form_widget(loginform.password, { 'attr' : { 'placeholder' : 'Enter Password' } }) }}
+                    <p id="error-password" class="error-message"></p>
+                </div>
+
+                <div class="single-input-fields login-check">
+                    <input type="checkbox" id="remember-me" name="keep-log">
+                    <label for="remember-me">Keep me logged in</label>
+                    <a href="#" class="f-right">Forgot Password?</a>
+                </div>
+
+
+            </div>
+
+
+            <div class="login-footer">
+                <p>Don’t have an account? <a href="{{ path('app_add_user') }}">Sign Up</a> here</p>
+                {{ form_widget(loginform.login, { 'attr' : { 'class' : 'submit-btn3' } }) }}
+            </div>
+        </div>
+        {{ form_end(loginform) }}
+    </div>
+
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/sweetalert2@11.js') }}"></script>
+    <script>
+        {% if message is defined %}
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "{{ message }}",
+            })
+        {% endif %}
+
+        {% if errors|length > 0  %}
+            {% for error in errors %}
+                document.getElementById("login_{{ error.propertyPath }}").classList.add('input-error')
+                document.getElementById("error-{{ error.propertyPath }}").style.display = "block"
+                document.getElementById("error-{{ error.propertyPath }}").innerText = "{{ error.message|raw }}"
+            {% endfor %}
+        {% endif %}
+    </script>
+
+{% endblock %}
