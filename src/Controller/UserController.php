@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\LoginType;
 use App\Form\UserType;
+use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,15 +15,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UserController extends AbstractController
 {
-    #[Route('/users/', name: 'app_users')]
-    public function index(): Response
-    {
-        return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
-    }
-
-
 
 #[Route('/users/create', name: 'app_add_user')]
 public function Add(Request $request,ManagerRegistry $doctrine,ValidatorInterface $validator): Response
@@ -45,12 +38,71 @@ public function Add(Request $request,ManagerRegistry $doctrine,ValidatorInterfac
         $em=$doctrine->getManager();
         $em->persist($user);
         $em->flush();
-        return $this->redirectToRoute('app_users');
+        return $this->render('user/login.html.twig', array(
+            'loginform'=>$this->createForm(LoginType::class,new User())->createView(),
+            'errors'=>array(),
+            'message'=>"Presque terminé, Pour finaliser votre inscription à LotusCare, il nous suffit de vérifier votre adresse e-mail. Nous venons d'envoyer un code de confirmation à votre email"
+        ));
     }
 
     return $this->render('user/create.html.twig', array(
         'userform'=>$Form->createView(),
         'errors'=>array()
+    ));
+}
+
+#[Route('/users/login', name: 'app_login')]
+public function Login(Request $request,UserRepository $userRepository,ValidatorInterface $validator): Response
+    {
+        $user=new User();
+        $loginForm=$this->createForm(LoginType::class,$user);
+        $loginForm->handleRequest($request);
+
+        $errors = $validator->validate($user);
+
+        if(count($errors) > 0){
+            return $this->render('user/login.html.twig', array(
+                'loginform'=>$loginForm->createView(),
+                'errors'=>$errors
+            ));
+        }
+
+        if ($loginForm->isSubmitted()&&$loginForm->isValid())/*verifier */
+        {
+            $userInDb = $userRepository->findOneBy(['email' => $user->getEmail()]);
+            if(!$userInDb){
+                return $this->render('user/login.html.twig', array(
+                    'loginform'=>$loginForm->createView(),
+                    'errors'=>array(),
+                    'message'=>"Utilisateur non trouvé dans notre base de données"
+                ));
+            }
+
+            if($userInDb->getPassword() != $user->getPassword()){
+                return $this->render('user/login.html.twig', array(
+                    'loginform'=>$loginForm->createView(),
+                    'errors'=>array(),
+                    'message'=>"Mot de passe incorrect"
+                ));
+            }
+            if($userInDb->getRole() == "admin"){
+                return $this->redirectToRoute('app_dashboard');
+            }
+            return $this->redirectToRoute('app_home');
+        }
+
+        return $this->render('user/login.html.twig', array(
+            'loginform'=>$loginForm->createView(),
+            'errors'=>array()
+        ));
+    }
+
+#[Route('/dashboard/users', name: 'app_users_admin')]
+public function DisplayUsersAdmin(UserRepository $userRepository): Response
+{
+    $users = $userRepository->findAll();
+    return $this->render('user/display_admin.html.twig', array(
+        'users'=>$users,
     ));
 }
 

@@ -23,7 +23,7 @@ class User
 
     #[ORM\Column(length: 255)]
     #[Assert\Email(
-        message: "votre email : {{ value }} n'est pas valide.",
+        message: "votre email n'est pas valide.",
     )]
     private ?string $email = null;
 
