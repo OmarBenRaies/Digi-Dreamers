@@ -38,6 +38,11 @@
             z-index: 2000 !important;
         }
     </style>
+
+    {% block stylesheets %}
+
+    {% endblock %}
+
     <title>dashboard</title>
 </head>
 
@@ -135,6 +140,9 @@
 <!-- Main JS -->
 <script src="{{ asset('back-assets/assets/js/main.js')}}"></script>
 
+{% block javascripts %}
+
+{% endblock %}
 
 </body>
 

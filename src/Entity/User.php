@@ -22,9 +22,7 @@ class User
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Email(
-        message: "votre email n'est pas valide.",
-    )]
+    #[Assert\Email(message: "votre email n'est pas valide.")]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]

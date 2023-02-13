@@ -83,7 +83,6 @@
                     {{ form_widget(userform.role, { 'attr' : { 'class' : 'form-control' } }) }}
                 </div>
 
-
             </div>
 
             <div class="login-footer">
@@ -103,11 +102,40 @@
 {% block javascripts %}
 <script src="{{ asset('assets/js/sweetalert2@11.js') }}"></script>
 <script>
+    {% if sameEmail is defined %}
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "Cet e-mail est déjà pris.",
+    })
+    {% endif %}
+
+    {% if sameCin is defined %}
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "Ce cin est déjà pris.",
+    })
+    {% endif %}
+
+
+    {% if message is defined %}
+    Swal.fire({
+        icon: 'success',
+        title: 'Verifier votre compte',
+        text: "{{ message|raw }}",
+    }).then((result) => {
+        window.location.href = "{{ path('app_login') }}"
+    })
+    {% endif %}
+
     {% if message is defined %}
         Swal.fire({
             icon: 'success',
             title: 'Verifier votre compte',
             text: "{{ message|raw }}",
+        }).then((result) => {
+            window.location.href = "{{ path('app_login') }}"
         })
     {% endif %}
 
