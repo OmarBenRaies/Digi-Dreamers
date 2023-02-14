@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
 class Evenement
@@ -22,18 +23,20 @@ class Evenement
     #[ORM\Column(length: 255)]
     private ?string $lieu = null;
 
+    #[Assert\Positive]
     #[ORM\Column]
     private ?int $nbr_participant = null;
 
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
-
+    #[Assert\Length(min: 20,minMessage: "Description is short!!!!")]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
     private ?float $total = null;
 
+    #[Assert\Positive]
     #[ORM\Column]
     private ?float $prix = null;
 

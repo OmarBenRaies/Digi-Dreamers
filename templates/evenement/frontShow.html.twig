@@ -1,0 +1,66 @@
+{% extends "front/base.html.twig" %}
+
+{% block body %}
+    <h1>Evenement</h1>
+
+    <section class="home-blog">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="cl-xl-7 col-lg-8 col-md-10">
+
+                    <div class="section-tittle text-center mb-40">
+                        <h2>{{ p.titre}}</h2>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+                            <table class="table-border-bottom-0">
+                                <tr>
+                                    <td>
+                                        <div class="blogs-cap">
+                                            <div class="blog-img">
+                                                <img src="{{ asset('uploads/event_image/')~p.getUrlImage() }}" height="400" width="600" alt="">
+                                            </div>
+                                            <span>{{ p.prix~"  TND" }}</span>
+                                            <h5>{{ p.lieu }}</h5>
+                                            <p>{{ p.date | date('d-m-y') }}</p>
+
+                                        </div>
+                                    </td>
+
+                                    <td>
+
+
+                                                <p> {{ p.description}} </p>>
+
+                                    </td>
+                                </tr>
+
+
+                            </table>
+
+
+                        </div>
+
+
+
+
+        </div>
+    </section>
+
+
+    <button class="btn btn-primary"> <a href="{{ path('app_home') }}">Back to home</a> </button>
+
+    <button class="btn btn-primary"> <a href="{{ path('show_pdf',{'id':p.id}) }}"  onclick="return confirm('Etes vous sûr de Participer {{ p.titre() }}')"  >Je participe</a> </button>
+
+
+
+{% endblock %}
+
+
+
