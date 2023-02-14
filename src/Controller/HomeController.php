@@ -2,10 +2,15 @@
 
 namespace App\Controller;
 
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Publication;
+use App\Form\PublicationType;
+use App\Repository\PublicationRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
 class HomeController extends AbstractController
 {
 
@@ -19,3 +24,4 @@ class HomeController extends AbstractController
         ]);
     }
 }
+   
