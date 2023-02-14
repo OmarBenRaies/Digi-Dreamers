@@ -1,0 +1,27 @@
+
+
+<table class="table text-white" border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for publication in publication %}
+            <tr>
+                <td>{{ publication.id }}</td>
+                <td>{{ publication.ContenuPub }}</td>
+                <td>{{ publication.CodePub }}</td>
+
+                <td><a href="{{ path ('deletepub',{'id':publication.id}) }}">delete</a></td>
+                <td><a href="{{ path ('editpub',{'id':publication.id}) }}">edit</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+</table>
+<br>
+
