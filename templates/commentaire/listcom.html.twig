@@ -1,0 +1,26 @@
+
+<table class="table text-white" border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commentaire in commentaire %}
+            <tr>
+                <td>{{ commentaire.id }}</td>
+                <td>{{ commentaire.ContenuComm }}</td>
+               
+
+                <td><a href="{{ path ('deletecom',{'id':commentaire.id}) }}">delete</a></td>
+                <td><a href="{{ path ('editcom',{'id':commentaire.id}) }}">edit</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+</table>
+<br>
+

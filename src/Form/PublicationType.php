@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class PublicationType extends AbstractType
 {
@@ -17,7 +18,7 @@ class PublicationType extends AbstractType
             ->add('contenupub')
             ->add('date_pub',DateType::class, ['label'=> 'Date', 'data'=>$today,])
             ->add('code_pub')
-            ->add('url_image_pub')
+            ->add('url_image_pub',FileType::class)
             
         ;
     }

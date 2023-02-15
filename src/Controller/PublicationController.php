@@ -44,7 +44,7 @@ public function list(ManagerRegistry $doctrine): Response
         $em=$doctrine->getManager();
         $em->remove($publication);
         $em->flush();
-        return $this->redirectToRoute('listpub');
+        return $this->redirectToRoute('home');
     }
 
     #[Route('/addpub',name:'addpub')]
