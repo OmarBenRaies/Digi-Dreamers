@@ -3,47 +3,35 @@
 {% block body %}
     <h1>Evenement</h1>
 
-    <table class="table">
-        <tbody>
+    <section class="home-blog">
+        <div class="container">
+            <a href="{{ path('app_evenement_index') }}"> <button class="btn btn-primary"> Back to list </button></a>
+            <div class="row justify-content-center">
+                <div class="cl-xl-7 col-lg-8 col-md-10">
 
-            <tr>
-                <th>Date</th>
-                <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Lieu</th>
-                <td>{{ evenement.lieu }}</td>
-            </tr>
-            <tr>
-                <th>Nbr_participant</th>
-                <td>{{ evenement.nbrParticipant }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ evenement.titre }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ evenement.description }}</td>
-            </tr>
-            <tr>
-                <th>Total</th>
-                <td>{{ evenement.total }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{ evenement.prix }}</td>
-            </tr>
-            <tr>
-                <th>Url_image</th>
-                <td>{{ evenement.urlImage }}</td>
-            </tr>
-        </tbody>
-    </table>
+                    <div class="section-tittle text-center mb-40">
+                        <h2>{{ p.titre}}</h2>
+                        <div class="blogs-cap">
+                            <div class="blog-img">
+                                <img src="{{ asset('uploads/event_image/')~p.getUrlImage() }}" height="200" width="200" alt="">
+                            </div>
+                            <span>{{ p.prix~"  TND" }}</span>
+                            <h5>{{ p.lieu }}</h5>
+                            <p>{{ p.date | date('d-m-y') }}</p>
+                            <p> {{ p.description}} </p>
+                        </div>
 
-    <a href="{{ path('app_evenement_index') }}">back to list</a>
+                        <a href={{ path('app_evenement_edit',{'id':p.id })}}> <button class="btn btn-success">Modifier </button></a>
+                        <a href="{{ path('show_pdf',{'id':p.id}) }}"  onclick="return confirm('Etes vous sûr de Supprimer {{ p.titre() }}')"  > <button class="btn btn-danger"> Supprimer </button></a>
 
-    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">edit</a>
 
-    {{ include('evenement/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
 {% endblock %}

@@ -59,7 +59,7 @@ class EvenementController extends AbstractController
     public function show(Evenement $evenement): Response
     {
         return $this->render('evenement/show.html.twig', [
-            'evenement' => $evenement,
+            'p' => $evenement,
         ]);
     }
 

@@ -4,26 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab0ef236-6ca6-4d9f-9e87-735b983cc1cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/evenement/frontShow.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/evenement/index2.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/evenement/mypdf.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Digi-Dreamers.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Digi-Dreamers.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="ab0ef236-6ca6-4d9f-9e87-735b983cc1cb" name="Changes" comment="controle de saisie">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/EvenementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EvenementController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Evenement.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Evenement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/EvenementRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/EvenementRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/back/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/back/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/back/header.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/back/header.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/back/sidebar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/back/sidebar.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/front/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/front/header.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/header.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/evenement/frontShow.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/evenement/frontShow.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/evenement/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/evenement/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/evenement/index2.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/evenement/index2.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/evenement/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/evenement/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,8 +228,16 @@
       <workItem from="1676162818183" duration="3465000" />
       <workItem from="1676167363371" duration="9954000" />
       <workItem from="1676232115725" duration="81000" />
-      <workItem from="1676232198589" duration="67818000" />
+      <workItem from="1676232198589" duration="80127000" />
     </task>
+    <task id="LOCAL-00001" summary="controle de saisie">
+      <created>1676376886232</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1676376886232</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -258,6 +255,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="controle de saisie" />
+    <option name="LAST_COMMIT_MESSAGE" value="controle de saisie" />
   </component>
 </project>

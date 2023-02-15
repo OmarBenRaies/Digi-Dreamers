@@ -26,7 +26,7 @@ class Evenement
     #[Assert\Positive]
     #[ORM\Column]
     private ?int $nbr_participant = null;
-
+    #[Assert\Length(min: 4,minMessage: "Titre is short!!!!")]
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
     #[Assert\Length(min: 20,minMessage: "Description is short!!!!")]

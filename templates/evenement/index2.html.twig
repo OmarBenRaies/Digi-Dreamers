@@ -4,66 +4,45 @@
 {% extends "front/base.html.twig" %}
 
 {% block body %}
+    <section class="home-blog">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="cl-xl-7 col-lg-8 col-md-10">
 
-    <!-- ============================================================== -->
-    <!-- Start right Content here -->
-    <!-- ============================================================== -->
-    <div class="content-page">
-        <!-- Start content -->
-        <div class="content">
-            <div class="container-fluid">
-
-
-                <div class="row">
-
-                    <div class="col-12">
-                        <div class="card-box">
-                            <div class="dropdown pull-right">
-                                <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
-                                    <i class="mdi mdi-dots-vertical"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                                </div>
-                            </div>
-                            <h4 class="m-t-0 header-title">List Evenement</h4>
-                            <p class="text-muted font-14 m-b-20">
-
-                            <table class="table">
-
-                                <tbody>
-                                {% for p in evenements %}
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-
-                                        <div class="single-blogs mb-30">
-                                            <div class="blog-img">
-                                                <a href="{{ path('app_evenement_frontShow', {'id': p.id}) }}"><<img src="{{ asset('uploads/event_image/')~p.getUrlImage() }}" alt=""></a>
-                                            </div>
-                                            <div class="blogs-cap">
-                                                <span>{{ p.prix~"  TND" }}</span>
-                                                <h5><a href="{{ path('app_evenement_frontShow', {'id': p.id}) }}">{{ p.titre }}</a></h5>
-                                                <p>{{ p.date|date('d-m-y') }}</p>
-                                                <span>{{ p.lieu}}</span>
-                                                <a href="{{ path('app_evenement_frontShow', {'id': p.id}) }}" class="red-btn">Read More</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="section-tittle text-center mb-40">
+                        <h2>Les Evenements</h2>
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                {% for p in evenements %}
+
+
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+
+                        <div class="single-blogs mb-30">
+                            <div class="blog-img">
+                                <a href="{{ path('app_evenement_frontShow', {'id': p.id}) }}"><<img src="{{ asset('uploads/event_image/')~p.getUrlImage() }}" height="300" width="250" alt=""></a>
+                            </div>
+                            <div class="blogs-cap">
+                                <span>{{ p.prix~"  TND" }}</span>
+                                <h5><a href="{{ path('app_evenement_frontShow', {'id': p.id}) }}">{{ p.titre }} <i class="fa-thin fa-magnifying-glass"></i></a></h5>
+                                <p>{{ p.total }}</p>
+                                <a href="{{ path('app_evenement_frontShow', {'id': p.id}) }}" class="red-btn">Read More</a>
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-    </div>
+
+        </div>
+    </section>
 {% endblock %}
+
+
+
+
 

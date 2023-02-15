@@ -68,10 +68,12 @@
                                         <td>{{ p.lieu }}</td>
                                         <td>{{ p.getNbrParticipant() }}</td>
 
-                                        <td><button class="btn btn-success"><a href={{ path('app_evenement_edit',{'id':p.id })}}>Modifier </a></button></td>
+                                        <td><a href={{ path('app_evenement_show',{'id':p.id })}}><button class="btn btn-dark">Show </button> </a></td>
 
-                                        <td> <button class="btn btn-danger"><a href="/evenement/{{ p.id }}" onclick="return confirm('Etes vous sûr de supprimer {{ p.titre() }}');"
-                                                > Supp </a></button></td>
+                                        <td><a href={{ path('app_evenement_edit',{'id':p.id })}}><button class="btn btn-success">Modifier </button></a></td>
+
+                                        <td><a href="/evenement/{{ p.id }}" onclick="return confirm('Etes vous sûr de supprimer {{ p.titre() }}');"
+                                            > <button class="btn btn-danger"> Supp </button> </a> </td>
 
 
                                     </tr>
