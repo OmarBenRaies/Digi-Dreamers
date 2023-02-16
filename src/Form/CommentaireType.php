@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 
 class CommentaireType extends AbstractType
 {
@@ -15,7 +17,7 @@ class CommentaireType extends AbstractType
         $today = new \DateTime();
         $builder
             ->add('contenu_comm')
-            ->add('date_comm',DateType::class, ['label'=> 'Date', 'data'=>$today,])
+            ->add('DateCom',DateType::class, ['label'=> 'Date', 'data'=>$today,])
         ;
     }
 

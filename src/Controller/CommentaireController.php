@@ -9,6 +9,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
+use App\Repository\PublicationRepository;
+use App\Form\PublicationType;
+use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 
 class CommentaireController extends AbstractController
 {
@@ -59,6 +64,23 @@ public function list(ManagerRegistry $doctrine): Response
             return $this->redirectToRoute('addcom');
         }
         return $this->renderForm('commentaire/addcom.html.twig',['formC'=>$form,'commentaire' => $commentaires]);
+    }
+
+    #[Route('/editcom/{id}', name: 'editcom')]
+    public function edit(HttpFoundationRequest $request,ManagerRegistry $doctrine,$id ): Response
+    {  
+        $repository= $doctrine->getRepository(Commentaire::class);
+        $commentaires=$repository->find($id);
+       $form=$this->createForm(CommentaireType::class,$commentaires);
+       $form->add('edit',SubmitType::class);
+       $form->handleRequest($request);
+       if($form->isSubmitted())
+       {
+        $em=$doctrine->getManager();
+        $em->flush();
+        return $this->redirectToRoute('addcom');
+       }
+       return $this->renderForm('commentaire/editcom.html.twig',['formC'=>$form,'commentaire' => $commentaires]);
     }
 }
 

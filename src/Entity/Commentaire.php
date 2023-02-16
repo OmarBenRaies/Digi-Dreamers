@@ -2,9 +2,13 @@
 
 namespace App\Entity;
 
+use App\Repository\PublicationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CommentaireRepository;
 use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
+
 
 #[ORM\Entity(repositoryClass: CommentaireRepository::class)]
 class Commentaire
@@ -19,6 +23,13 @@ class Commentaire
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $DateCom = null;
+
+    #[ORM\ManyToOne(inversedBy: 'commentaires')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Publication $Publication = null;
+
+   
+   
 
     public function getId(): ?int
     {
@@ -48,4 +59,20 @@ class Commentaire
 
         return $this;
     }
+
+    public function getPublication(): ?Publication
+    {
+        return $this->Publication;
+    }
+
+    public function setPublication(?Publication $Publication): self
+    {
+        $this->Publication = $Publication;
+
+        return $this;
+    }
+
+   
+
+
 }
