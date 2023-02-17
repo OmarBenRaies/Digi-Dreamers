@@ -17,7 +17,7 @@ class PublicationType extends AbstractType
         $today = new \DateTime();
         $builder
             ->add('contenupub')
-            ->add('date_pub',DateType::class, ['label'=> 'Date', 'data'=>$today,])
+            //->add('date_pub')
             ->add('code_pub')
             
             ->add('UrlImagePub',FileType::class, [

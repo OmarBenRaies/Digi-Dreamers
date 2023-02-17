@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Commentaire;
+use App\Entity\Publication;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,8 +18,16 @@ class CommentaireType extends AbstractType
     {
         $today = new \DateTime();
         $builder
+
             ->add('contenu_comm')
-            ->add('DateCom',DateType::class, ['label'=> 'Date', 'data'=>$today,])
+             ->add('Publication', EntityType::class, [
+                'class' => Publication::class,
+                'choice_label' => 'code_pub',
+                'multiple' => false,
+                'expanded' => false,
+            ]);
+
+          // ->add('DateCom',DateType::class, ['label'=> 'Date', 'data'=>$today,])
         ;
     }
 

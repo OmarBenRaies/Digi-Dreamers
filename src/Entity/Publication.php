@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PublicationRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -34,6 +35,7 @@ class Publication
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->DatePub=new \DateTime();
     }
 
 

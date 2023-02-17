@@ -38,6 +38,7 @@ public function list(ManagerRegistry $doctrine): Response
         'publication' => $publications,
     ]);
 }
+#[Route('/blog_details', name: 'blogdetails')]
 
 #[Route('/deletepub/{id}',name: 'deletepub')]
     public function delete (ManagerRegistry $doctrine,$id):Response
@@ -47,7 +48,7 @@ public function list(ManagerRegistry $doctrine): Response
         $em=$doctrine->getManager();
         $em->remove($publication);
         $em->flush();
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('listpub');
     }
 
     #[Route('/addpub',name:'addpub')]
@@ -61,6 +62,7 @@ public function list(ManagerRegistry $doctrine): Response
         $form->handleRequest($request);
        // if ($form->isSubmitted())
         {
+            //$date = new \DateTime('@',strtotime('now'));
             $em=$doctrine->getManager();
             $em->persist($publication);
     {
@@ -91,8 +93,9 @@ public function list(ManagerRegistry $doctrine): Response
                 // instead of its contents
                 $publication->setUrlImagePub($newFilename);
             }
+
             $em->flush();
-            return $this->redirectToRoute('addpub');
+            return $this->redirectToRoute('listpub');
         }
         return $this->renderForm('publication/addpub.html.twig',['formP'=>$form,'publication' => $publications]);
     }
@@ -112,9 +115,20 @@ public function list(ManagerRegistry $doctrine): Response
        {
         $em=$doctrine->getManager();
         $em->flush();
-        return $this->redirectToRoute('addpub');
+        return $this->redirectToRoute('listpub');
        }
        return $this->renderForm('publication/editpub.html.twig',['formP'=>$form,'publication' => $publications]);
    }
+
+   #[Route('/getpub/{id}', name: 'getpubid')]
+    public function show_id(ManagerRegistry $doctrine, $id): Response
+    {
+        $repository = $doctrine->getRepository(Publication::class);
+        $publications = $repository->find($id);
+        return $this->render('publication/detailspub.html.twig', [
+            'Publication' => $publications,
+            'id' => $id,
+        ]);
+    }
 }
 

@@ -28,7 +28,12 @@ class Commentaire
     #[ORM\JoinColumn(nullable: false)]
     private ?Publication $Publication = null;
 
-   
+
+
+    public function __construct()
+    {
+        $this->DateCom=new \DateTime();
+    }
    
 
     public function getId(): ?int
