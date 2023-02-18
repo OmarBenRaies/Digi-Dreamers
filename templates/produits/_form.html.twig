@@ -1,0 +1,141 @@
+{% extends "back/base.html.twig" %}
+
+
+{%block body%}
+
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+        <div class="container-fluid">
+
+
+            <div class="row">
+                <div class="col-md-12"  style="display: flex; justify-content: center;align-items:center;width: 100%" >
+                    <div class="card-box">
+                        <div class="dropdown pull-right">
+
+                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                                <i class="mdi mdi-dots-vertical"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
+                            </div>
+                        </div>
+
+                        {{ form_start(form, {'attr': {novalidate: 'novalidate'}}) }}
+
+
+                        <div class="form-group">
+                            <label for="nom">Reference</label>
+
+                            {{ form_widget(form.ref, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.ref, {'attr': {'class': 'text-danger'}}) }}
+
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="nom">Description</label>
+
+
+                            {{ form_widget(form.Description, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.Description, {'attr': {'class': 'text-danger'}}) }}
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="nom">Prix</label>
+
+
+                            {{ form_widget(form.Prix, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.Prix, {'attr': {'class': 'text-danger'}}) }}
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="nom">Qte_stock</label>
+
+
+                            {{ form_widget(form.Qte_stock, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.Qte_stock, {'attr': {'class': 'text-danger'}}) }}
+
+                        </div>
+
+                        
+
+
+
+
+
+
+
+
+
+                        <div class="form-group">
+
+                            <div class="col-sm-12">
+                                <div class="card-box">
+
+                                    <div class="dropdown pull-right">
+                                        <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </a>
+                                    </div>
+
+                                    <h4 class="header-title m-t-0 m-b-30">Image</h4>
+                                    {{ form_widget(form.image, {'attr': {'class': 'dropify','data-height':'200'}}) }}
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    
+
+
+
+
+
+                        <div class="form-group">
+                            <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+                        </div>
+
+
+                        {{form_end(form)}}
+
+                    </div>
+                </div>
+            </div><a href="{{ path('app_produits_index') }}">back to list</a>
+        </div>
+    </div>
+    </div>
+    <script type="text/javascript">
+        $('.dropify').dropify({
+            messages: {
+                'default': 'Drag and drop a file here or click',
+                'replace': 'Drag and drop or click to replace',
+                'remove': 'Remove',
+                'error': 'Ooops, something wrong appended.'
+            },
+            error: {
+                'fileSize': 'The file size is too big (1M max).'
+            }
+        });
+    </script>
+    {%endblock%}

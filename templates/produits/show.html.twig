@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<title>Produits</title>
+
+{% block body %}
+    <h1>Produits</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ produit.id }}</td>
+            </tr>
+            <tr>
+                <th>Ref</th>
+                <td>{{ produit.ref }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ produit.Description }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ produit.Prix }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ produit.Image }}</td>
+            </tr>
+            <tr>
+                <th>Qte_stock</th>
+                <td>{{ produit.QteStock }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_produits_index') }}">back to list</a>
+
+    <a href="{{ path('app_produits_edit', {'id': produit.id}) }}">edit</a>
+
+    {{ include('produits/_delete_form.html.twig') }}
+{% endblock %}
