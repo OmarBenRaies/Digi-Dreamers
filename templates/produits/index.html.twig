@@ -52,6 +52,7 @@
                                     <th>Prix</th>
                                     <th>Image</th>
                                     <th>QStock</th>
+                                    <th>Categorie</th>
 
 
 
@@ -64,7 +65,7 @@
                                         <td>{{ p.Description }}</td>
                                         <td>{{ p.Prix }}</td>
                                         <td>{{ p.image }}</td>
-                                        <td>{{ p.Qte_stock }}</td>
+                                        
 
                                         <td><button class="btn btn-success"><a href="{{ path('app_produits_edit',{'id':p.id})}}">Modifier </a></button></td>
                                          <td><button class="btn btn-danger"><a href="/produits/{{p.id}}" onclick="return confirm('voulez-vus supprimer ce produit? {{p.ref()}}');">supp </a></button></td>
