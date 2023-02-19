@@ -13,6 +13,7 @@ use App\Repository\PublicationRepository;
 use App\Form\PublicationType;
 use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use App\Entity\Publication;
 
 
 class CommentaireController extends AbstractController
@@ -26,13 +27,14 @@ class CommentaireController extends AbstractController
             'controller_name' => 'CommentaireController',
         ]);
     }
+
     #[Route('/listcom', name: 'listcom')]
 public function list(ManagerRegistry $doctrine): Response
 {
     $repository= $doctrine->getRepository(Commentaire::class);
     $commentaires=$repository->findAll();
-    return $this->render('home/index.html.twig', [
-        'publication' => $commentaires,
+    return $this->render('commentaire/listcom.html.twig', [
+        'commentaire' => $commentaires,
     ]);
 } 
 
@@ -44,7 +46,7 @@ public function list(ManagerRegistry $doctrine): Response
         $em=$doctrine->getManager();
         $em->remove($commentaire);
         $em->flush();
-        return $this->redirectToRoute('listcom ');
+        return $this->redirectToRoute('listcom');
     }
 
     #[Route('/addcom',name:'addcom')]

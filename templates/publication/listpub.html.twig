@@ -15,13 +15,13 @@
                             </a>
                         </div>
                         <div class="blog_details">
-                            <a class="d-inline-block" href="blog_details.html">
+                            <a class="d-inline-block" href="">
                                 <h2 class="blog-head" style="color: #2d2d2d;">{{ publication.CodePub }}</h2>
                             </a>
                             <p>{{ publication.ContenuPub }}</p>
                             <ul class="blog-info-link">
-                                <!--<li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>-->
+                                <td><a href="{{ path ('editpubfront',{'id':publication.id}) }}">edit</a></td>
+               <td><a href="{{ path ('deletepub',{'id':publication.id}) }}">delete</a></td>   
                             </ul>
                         </div>
                     </article>      
@@ -50,7 +50,7 @@
                 <td>{{ publication.ContenuPub }}</td>
                 <td>{{ publication.CodePub }}</td>
 
-                <td><a href="{{ path ('deletepub',{'id':publication.id}) }}">delete</a></td>
+                
                 <td><a href="{{ path ('editpub',{'id':publication.id}) }}">edit</a></td>
             </tr>
         {% else %}

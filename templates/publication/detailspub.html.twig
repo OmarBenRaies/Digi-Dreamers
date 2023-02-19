@@ -1,7 +1,7 @@
 
 {% extends "front/base.html.twig" %}
 {% block body %}
-<!--<main>
+<main>
 
 <div class="hero-area section-bg2">
 <div class="container">
@@ -24,14 +24,15 @@
 </div>
 </div>
 </div>
--->
+
 
 <section class="blog_area single-post-area section-padding">
 <div class="container">
 <div class="row">
 <div class="col-lg-8 posts-list">
 <div class="single-post">
-{% for publication in publication %}
+
+
 
 <div class="feature-img">
 <img class="img-fluid" src="assets/img/blog/single_blog_1.jpg" alt="">
@@ -39,24 +40,22 @@
 <div class="blog_details">
 
 
-<h2 style="color: #2d2d2d;">{{ publication.CodePub }}</h2>
+<h2 style="color: #2d2d2d;">{{Publication.CodePub}}</h2>
 
-<!--<ul class="blog-info-link mt-3 mb-4">
+<ul class="blog-info-link mt-3 mb-4">
 <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
 <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-</ul>-->
+</ul>
 <p class="excert">
-MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-fraction of the camp price. However, who has the willpower
+{{Publication.ContenuPub }}
 </p>
-<p>{{ publication.ContenuPub }}</p>
+<p>
+</p>
 <div class="quote-wrapper">
 <div class="quotes">
-<h2 class="blog-head" style="color: #2d2d2d;">{{ publication.CodePub }}</h2>
+<h2 class="blog-head" style="color: #2d2d2d;"><img class="card-img rounded-0" style="width: 80%;" width='100px' src="{{ asset('uploadsforum/imagespublication/'~Publication.UrlImagePub) }}" alt=""></h2>
 
 
-
 </div>
 </div>
 </div>
@@ -64,9 +63,8 @@ fraction of the camp price. However, who has the willpower
 </div>
 
 </div>
-{% endfor %}
 
-<!--
+
 <div class="navigation-top">
 <div class="d-sm-flex justify-content-between text-center">
 <p class="like-info"><span class="align-middle"><i class="fa fa-heart"></i></span> Lily and 4
@@ -79,7 +77,9 @@ people like this</p>
 <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
 <li><a href="#"><i class="fab fa-behance"></i></a></li>
 </ul>
+
 </div>
+
 <div class="navigation-area">
 <div class="row">
 <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
@@ -94,18 +94,20 @@ people like this</p>
 </a>
 </div>
 <div class="detials">
-<p>Prev Post</p>
-<a href="#">
+<p>delete</p>
+  
 <h4 style="color: #2d2d2d;">Space The Final Frontier</h4>
 </a>
 </div>
 </div>
 <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
 <div class="detials">
-<p>Next Post</p>
-<a href="#">
+<p>modifier</p>
+
 <h4 style="color: #2d2d2d;">Telescopes 101</h4>
 </a>
+
+             
 </div>
 <div class="arrow">
 <a href="#">
@@ -121,31 +123,22 @@ people like this</p>
 </div>
 </div>
 </div>
-<div class="blog-author">
-<div class="media align-items-center">
-<img src="assets/img/blog/author.png" alt="">
-<div class="media-body">
-<a href="#">
-<h4>Harvard milan</h4>
-</a>
-<p>Second divided from form fish beast made. Every of seas all gathered use saying you're, he
-our dominion twon Second divided from</p>
-</div>
-</div>
-</div>
+<!--
 <div class="comments-area">
-<h4>05 Comments</h4>
 <div class="comment-list">
 <div class="single-comment justify-content-between d-flex">
 <div class="user justify-content-between d-flex">
 <div class="thumb">
-<img src="assets/img/blog/comment_1.png" alt="">
+
+
 </div>
 <div class="desc">
 <p class="comment">
-Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-</p>
+
+<td></td>
+
+
+
 <div class="d-flex justify-content-between">
 <div class="d-flex align-items-center">
 <h5>
@@ -167,6 +160,7 @@ Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
 <div class="thumb">
 <img src="assets/img/blog/comment_2.png" alt="">
 </div>
+
 <div class="desc">
 <p class="comment">
 Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
@@ -246,7 +240,7 @@ Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
 </div>
 </div>
 </div>
-<!--<div class="col-lg-4">
+<div class="col-lg-4">
 <div class="blog_right_sidebar">
 <aside class="single_sidebar_widget search_widget">
 <form action="#">

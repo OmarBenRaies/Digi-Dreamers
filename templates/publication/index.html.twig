@@ -1,8 +1,9 @@
+
 {% extends "back/base.html.twig" %}
-
 {% block body %}
+  <div class="row">
 
-    <!-- ============================================================== -->
+     <!-- ============================================================== -->
     <!-- Start right Content here -->
     <!-- ============================================================== -->
     <div class="content-page">
@@ -36,9 +37,10 @@
                                 <tr>
                                     <td>
                                         <a href="{{ path('addpub') }}">
-                                            <button type="button" class="btn btn-primary">Ajouter publications</button>                            </p>
+                                            <button type="button" class="btn btn-primary">Ajouter Publication</button>                            </p>
 
                                         </a>
+
 
 
                                     </td>
@@ -47,31 +49,36 @@
                             <table class="table">
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th>ContenuPub</th>
-                                    <th>datepub</th>
-                                    <th>codepub</th>
-                                    <th>Image</th>
-                                    
+                                    <th>Titre Publication</th>
+                                    <th>Contenu Publication</th>
+                                   <th>Date Publication</th>
+                            
+                                    <th>Image Publication</th>
+
+                                       <th>edit</th>
+                                       <th>delete</th>
 
 
 
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for p in  publication %}
-                                    <tr>
-                                        <td>{{ p.ContenuPub }}</td>
-                                        <td>{{ p.DatePub }}</td>
-                                        <td>{{ p.CodePub }}</td>
-                                        <td>{{ p.UrlImagePub }}</td>
-                                       
-                                        <td><button class="btn btn-success"><a href="{{ path('editpub',{'id':p.id})}}">Modifier </a></button></td>
-                                         <td><button class="btn btn-danger"><a href="/publications/{{p.id}}" onclick="return confirm('voulez-vus supprimer cette publications? {{p.id()}}');">supp </a></button></td>
 
-                                    </tr>
+                        {% for publication in publication %}
+            <tr>
+                <td>{{ publication.id }}</td>
+                <td>{{ publication.ContenuPub }}</td>
+                <td>{{ publication.CodePub }}</td>
+<td><img style="width: 350px;" src="{{ asset('uploadsforum/imagespublication/'~publication.UrlImagePub) }}" alt=""> </td>
+                
+                <td><a href="{{ path ('editpub',{'id':publication.id}) }}">edit</a></td>
+               <td><a href="{{ path ('deletepub',{'id':publication.id}) }}">delete</a></td>            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
 
-
-                                {% endfor %}
                                 </tbody>
                             </table>
                         </div>
@@ -80,4 +87,9 @@
             </div>
         </div>
     </div>
+                                   
+                                   
+                                    
+
+
 {% endblock %}

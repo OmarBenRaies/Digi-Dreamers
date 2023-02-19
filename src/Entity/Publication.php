@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PublicationRepository::class)]
 class Publication
@@ -18,12 +19,15 @@ class Publication
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+   
+
     private ?string $ContenuPub = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $DatePub = null;
 
     #[ORM\Column(length: 255)]
+    
     private ?string $CodePub = null;
 
     #[ORM\Column(length: 255)]
@@ -123,5 +127,10 @@ class Publication
         return $this;
     }
 
+   
+
+    public function __toString() {
+        return $this->CodePub;
     
+}
 }

@@ -1,26 +1,100 @@
 
-<table class="table text-white" border="1">
-        <thead>
-            <tr>
-                <th>Id</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for commentaire in commentaire %}
+{% extends "back/base.html.twig" %}
+{% block body %}
+  <div class="row">
+
+     <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="container-fluid">
+
+
+                <div class="row">
+
+                    <div class="col-12">
+                        <div class="card-box">
+                            <div class="dropdown pull-right">
+                                <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="mdi mdi-dots-vertical"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Another action</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Something else</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
+                                </div>
+                            </div>
+                            <h4 class="m-t-0 header-title">Liste commentaire</h4>
+                            <p class="text-muted font-14 m-b-20">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('addcom') }}">
+                                            <button type="button" class="btn btn-primary">Ajouter commentaire</button>                            </p>
+
+                                        </a>
+
+
+                                    </td>
+                            </table>
+
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>ID    </th>
+                                    <th>Commentaire </th>
+                            
+                                       <th>date</th>
+                                       <th>publication</th>
+                                    
+                                       <th>edit</th>
+                                       <th>delete</th>
+
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                        {% for commentaire in commentaire %}
             <tr>
                 <td>{{ commentaire.id }}</td>
-                <td>{{ commentaire.ContenuComm }}</td>
-               
+                <td>{{ commentaire.contenucomm}}</td>
+                <td>{{ commentaire.datecom|date('d-m-y')}}</td>
 
-                <td><a href="{{ path ('deletecom',{'id':commentaire.id}) }}">delete</a></td>
+
+
+                <td>{{ commentaire.Publication}}</td>
+
+
+
+
                 <td><a href="{{ path ('editcom',{'id':commentaire.id}) }}">edit</a></td>
-            </tr>
+               <td><a href="{{ path ('deletecom',{'id':commentaire.id}) }}">delete</a></td>            </tr>
         {% else %}
             <tr>
                 <td colspan="3">no records found</td>
             </tr>
         {% endfor %}
-        </tbody>
-</table>
-<br>
 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                                   
+                                   
+                                    
+
+
+{% endblock %}
