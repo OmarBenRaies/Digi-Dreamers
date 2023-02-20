@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Commentaire;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\PublicationRepository;
 use App\Entity\Publication;
 use App\Form\PublicationType;
+use App\Form\CommentaireType;
+
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -217,13 +220,15 @@ public function list(ManagerRegistry $doctrine): Response
    }
 
    #[Route('/getpub/{id}', name: 'getpubid')]
-    public function show_id(ManagerRegistry $doctrine, $id): Response
+    public function show_id(ManagerRegistry $doctrine,ManagerRegistry $doc, $id): Response
     {
         $repository = $doctrine->getRepository(Publication::class);
         $publications = $repository->find($id);
+
+        $commentaire= $publications->getCommentaires();
         return $this->render('publication/detailspub.html.twig', [
             'Publication' => $publications,
-            'id' => $id,
+            'commentaire'  => $commentaire,
         ]);
     }
 }

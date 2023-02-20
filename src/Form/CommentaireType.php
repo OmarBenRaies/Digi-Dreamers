@@ -20,12 +20,7 @@ class CommentaireType extends AbstractType
         $builder
 
             ->add('contenu_comm')
-             ->add('Publication', EntityType::class, [
-                'class' => Publication::class,
-                'choice_label' => 'code_pub',
-                'multiple' => false,
-                'expanded' => false,
-            ]);
+             
 
           
         ;

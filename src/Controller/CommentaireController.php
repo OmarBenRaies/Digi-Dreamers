@@ -14,6 +14,7 @@ use App\Form\PublicationType;
 use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Entity\Publication;
+use App\Controller\EntityType;
 
 
 class CommentaireController extends AbstractController
@@ -67,6 +68,29 @@ public function list(ManagerRegistry $doctrine): Response
         }
         return $this->renderForm('commentaire/addcom.html.twig',['formC'=>$form,'commentaire' => $commentaires]);
     }
+
+    #[Route('/addcomFront/{id}',name:'addcom2')]
+    public function add2 (HttpFoundationRequest $request,ManagerRegistry $doctrine,$id,PublicationRepository $publicationRepository): Response
+    {
+        $repository= $doctrine->getRepository(Commentaire::class);
+        $commentaires=$repository->findAll();
+        $commentaire=new Commentaire;
+        $commentaire->setPublication($publicationRepository->find($id));
+        $form=$this->createForm(CommentaireType::class,$commentaire);
+        $form->add('add',SubmitType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted())
+        {
+            $em=$doctrine->getManager();
+            $em->persist($commentaire);
+            $em->flush();
+            return $this->redirectToRoute('getpubid',['id'=>$id]);
+        }
+        return $this->renderForm('commentaire/addcomFront.html.twig',['formC'=>$form,'commentaire' => $commentaires]);
+    }
+
+    
+
 
     #[Route('/editcom/{id}', name: 'editcom')]
     public function edit(HttpFoundationRequest $request,ManagerRegistry $doctrine,$id ): Response
