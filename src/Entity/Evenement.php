@@ -17,6 +17,7 @@ class Evenement
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\GreaterThanOrEqual("today",message: "date not valid")]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
@@ -26,6 +27,7 @@ class Evenement
     #[Assert\Positive]
     #[ORM\Column]
     private ?int $nbr_participant = null;
+
     #[Assert\Length(min: 4,minMessage: "Titre is short!!!!")]
     #[ORM\Column(length: 255)]
     private ?string $titre = null;

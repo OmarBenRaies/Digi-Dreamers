@@ -1,30 +1,33 @@
-<!DOCTYPE html>
 
-<title>Association</title>
+
+{% extends "back/base.html.twig" %}
 
 {% block body %}
     <h1>Association</h1>
 
-    <table class="table">
-        <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ association.id }}</td>
-        </tr>
-        <tr>
-            <th>Nom</th>
-            <td>{{ association.nom }}</td>
-        </tr>
-        <tr>
-            <th>Description</th>
-            <td>{{ association.description }}</td>
-        </tr>
-        </tbody>
-    </table>
+    <section class="home-blog">
+        <div class="container">
+            <a href="{{ path('app_association_index') }}"> <button class="btn btn-primary"> Back to list </button></a>
+            <div class="row justify-content-center">
 
-    <a href="{{ path('app_association_index') }}">back to list</a>
 
-    <a href="{{ path('app_association_edit', {'id': association.id}) }}">edit</a>
+                <div class="section-tittle text-center mb-40">
+                    <h2>{{ association.nom }}</h2>
+                    <p>{{ association.description }}</p>
 
-    {{ include('association/_delete_form.html.twig') }}
+                    <a href={{ path('app_association_edit',{'id':association.id })}}> <button class="btn btn-success">Modifier </button></a>
+                    <a href="{{ path('app_association_delete',{'id':association.id}) }}"  onclick="return confirm('Etes vous sûr de supprimer l association  {{ association.nom }} ')"  > <button class="btn btn-danger"> Supprimer </button></a>
+                    <a href="{{ path('show_pdf',{'id':association.id}) }}"   > <button class="btn btn-danger"> Imprimer </button></a>
+
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
 {% endblock %}
+

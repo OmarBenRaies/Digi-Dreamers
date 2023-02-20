@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Association;
 use App\Form\AssociationType;
 use App\Repository\AssociationRepository;
+use Dompdf\Dompdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -78,7 +79,38 @@ class AssociationController extends AbstractController
         $response->send();
         return $this->redirectToRoute('app_association_index');
     }
+    #[Route('/event/facture/{id}', name: 'show_pdf')]
+    public function generatePdfAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $association = $em->getRepository(Association::class)->find($id);
 
+
+        $html = $this->renderView('association/mypdf.html.twig', [
+
+            'Nom'=>$association->getNom(),
+            'Dons' => $association->getDons(),
+
+
+
+        ]);
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        $filename = 'your_pdf_file.pdf';
+
+        return new Response(
+            $dompdf->output(),
+            200,
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="'.$filename.'"',
+            ]
+        );
+    }
     /*public function delete(Request $request, Association $association, AssociationRepository $associationRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$association->getId(), $request->request->get('_token'))) {

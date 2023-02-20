@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Evenement;
+use App\Entity\User;
 use App\Form\EvenementType;
 use App\Repository\EvenementRepository;
+use App\Repository\UserRepository;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
@@ -121,10 +123,30 @@ class EvenementController extends AbstractController
         ]);
     }
 
+    #[Route('/front/participer/{id}', name: 'app_evenement_participer', methods: ['GET'])]
+    public function participer($id): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $event = $em->getRepository(Evenement::class)->find($id);
+
+
+        $usr = $em->getRepository(User::class)->find(1);
+        if ($event->getNbrParticipant() > 0) {
+            $event->setNbrParticipant($event->getNbrParticipant() - 1) ;
+            $event->addUser($usr);
+            $event->setTotal($event->getTotal() + $event->getPrix());
+            $em->flush();
+
+        }
+
+        return $this->redirectToRoute('app_evenement_frontShow',['id'=>$id], Response::HTTP_SEE_OTHER);
+    }
 
 
 
-    #[Route('/event/facture/{id}', name: 'show_pdf')]
+
+
+   /* #[Route('/event/facture/{id}', name: 'show_pdf')]
     public function generatePdfAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -157,7 +179,7 @@ class EvenementController extends AbstractController
                 'Content-Disposition' => 'inline; filename="'.$filename.'"',
             ]
         );
-    }
+    }*/
     /*#[Route('/list/search', name: 'app_search')]
 
     public function searchAction(Request $request)

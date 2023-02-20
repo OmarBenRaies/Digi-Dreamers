@@ -20,7 +20,9 @@
                             </div>
                             <span>{{ p.prix~"  TND" }}</span>
                             <h5>{{ p.lieu }}</h5>
+                            <p> {{ p.getNbrParticipant() ~ " Places disponibles" }}</p>
                             <p>{{ p.date | date('d-m-y') }}</p>
+
                             <p> {{ p.description}} </p>
                         </div>
 
@@ -28,7 +30,7 @@
 
 
                         <a href="{{ path('app_evenement_index2') }}">  <button class="btn btn-primary"> Back to list </button></a>
-                        <a href="{{ path('show_pdf',{'id':p.id}) }}"  onclick="return confirm('Etes vous sûr de Participer {{ p.titre() }}')"  > <button class="btn btn-primary"> Je participe </button></a>
+                        <a href="{{ path('app_evenement_participer',{'id':p.id}) }}"  onclick="return confirm('Etes vous sûr de Participer {{ p.titre() }}')"  > <button class="btn btn-primary"> Je participe </button></a>
 
 
                     </div>

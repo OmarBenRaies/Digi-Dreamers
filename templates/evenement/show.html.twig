@@ -22,7 +22,7 @@
                         </div>
 
                         <a href={{ path('app_evenement_edit',{'id':p.id })}}> <button class="btn btn-success">Modifier </button></a>
-                        <a href="{{ path('show_pdf',{'id':p.id}) }}"  onclick="return confirm('Etes vous sûr de Supprimer {{ p.titre() }}')"  > <button class="btn btn-danger"> Supprimer </button></a>
+                        <a href="{{ path('app_evenement_delete',{'id':p.id}) }}"  onclick="return confirm('Etes vous sûr de Supprimer {{ p.titre() }}')"  > <button class="btn btn-danger"> Supprimer </button></a>
 
 
                     </div>

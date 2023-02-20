@@ -1,0 +1,31 @@
+{% extends "back/base.html.twig" %}
+
+{% block body %}
+    <h1>Don</h1>
+
+    <section class="home-blog">
+        <div class="container">
+            <a href="{{ path('app_don_index') }}"> <button class="btn btn-primary"> Back to list </button></a>
+            <div class="row justify-content-center">
+
+
+                    <div class="section-tittle text-center mb-40">
+                        <h2>{{ p.somme ~ " DT"}}</h2>
+
+                            <h5>{{ p.evenement.titre}}</h5>
+                            <p>{{ p.association.nom }}</p>
+
+                        <a href={{ path('app_don_edit',{'id':p.id })}}> <button class="btn btn-success">Modifier </button></a>
+
+
+
+                    </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+{% endblock %}
