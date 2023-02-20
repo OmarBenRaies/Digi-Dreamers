@@ -4,22 +4,29 @@ namespace App\Entity;
 
 use App\Repository\ProduitsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ProduitsRepository::class)]
 class Produits
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column ]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:4,minMessage:"Veuillez entrer une reference de minimum 4 caractères")]
     private ?string $ref = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:4,minMessage:"Veuillez entrer une description de minimum 10 caractères")]
+   
     private ?string $Description = null;
 
     #[ORM\Column]
+  
+    
     private ?float $Prix = null;
 
     #[ORM\Column(length: 255)]

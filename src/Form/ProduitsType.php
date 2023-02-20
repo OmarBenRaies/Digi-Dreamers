@@ -10,6 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use App\Form\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 
 
 class ProduitsType extends AbstractType
@@ -20,7 +21,7 @@ class ProduitsType extends AbstractType
             ->add('ref')
             ->add('Description')
             ->add('Prix')
-            ->add('image', FileType::class,array('data_class'=>null))
+            ->add('Image',FileType::class,array('data_class'=>null))
             ->add('Qte_stock')
             ->add('Categorie' ,EntityType::class,[
             'class' => Categories::class,

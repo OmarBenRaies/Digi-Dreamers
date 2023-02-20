@@ -62,6 +62,7 @@
                                         <td>{{ p.nomcat }}</td>
                                         
 
+                                        <td><button class="btn btn-success"><a href="{{ path('app_categories_show',{'id':p.id})}}">Show </a></button></td>
                                         <td><button class="btn btn-success"><a href="{{ path('app_categories_edit',{'id':p.id})}}">Modifier </a></button></td>
                                          <td><button class="btn btn-danger"><a href="/categories/{{p.id}}" onclick="return confirm('voulez-vus supprimer cette categorie? {{p.codecat()}}');">supp </a></button></td>
 

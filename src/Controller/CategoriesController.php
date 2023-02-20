@@ -75,4 +75,15 @@ class CategoriesController extends AbstractController
 
         return $this->redirectToRoute('app_categories_index', [], Response::HTTP_SEE_OTHER);
     }
+    
+    #[Route('/showPro/{id}', name: 'app_categories_showPro', methods: ['GET'])]
+    public function index3(CategoriesRepository $categoriesRepository,$id): Response
+    {   $categorie = $categoriesRepository->find($id);
+        return $this->render('categories/showPro.html.twig', [
+            'produits' => $categorie->getProduits(),
+            'categories' => $categoriesRepository->findAll(),
+        ]);
+    }
+
+
 }

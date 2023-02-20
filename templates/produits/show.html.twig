@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-
-<title>Produits</title>
+{% extends "back/base.html.twig" %}
 
 {% block body %}
     <h1>Produits</h1>
@@ -25,7 +23,7 @@
             </tr>
             <tr>
                 <th>Image</th>
-                <td>{{ produit.Image }}</td>
+                <td><img src="{{ asset('uploads/produit_image/')~produit.getImage() }}" alt=""></td>
             </tr>
             <tr>
                 <th>Qte_stock</th>

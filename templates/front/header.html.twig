@@ -42,14 +42,18 @@
                     <div class="main-menu d-none d-lg-block">
                         <nav>
                             <ul id="navigation">
-                                <li><a href="#">Home</a></li>
+                                <li><a href="{{path('app_home')}}">Home</a></li>
                                  <li><a href="#">Categories <i class="fas fa-angle-down"></i></a>
+                                    
                                     <ul class="submenu">
-                                        <li><a href="#">Visage</a></li>
+                                        {% block nav %}
+                                        <li><a href="{{path('app_categories_showPro',{'id':1})}}">Visage</a></li>
                                         <li><a href="#">Corps</a></li>
                                         <li><a href="#">Cheveux</a></li>
                                         <li><a href="#">Hygiéne</a></li>
+                                        {% endblock %}
                                     </ul>
+                                    
                                 </li>
                                 <li><a href="#">Produit</a></li>
                                 <li class="new"><a href="#">Baby Collection</a></li>

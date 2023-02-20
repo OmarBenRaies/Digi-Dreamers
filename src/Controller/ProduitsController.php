@@ -5,10 +5,14 @@ namespace App\Controller;
 use App\Entity\Produits;
 use App\Form\ProduitsType;
 use App\Repository\ProduitsRepository;
+use App\Repository\CategoriesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+
 
 #[Route('/produits')]
 class ProduitsController extends AbstractController
@@ -21,14 +25,29 @@ class ProduitsController extends AbstractController
         ]);
     }
 
+    #[Route('/showAll/front', name: 'app_produits_indexFront', methods: ['GET'])]
+    public function indexFront(ProduitsRepository $produitsRepository,CategoriesRepository $categoriesRepository): Response
+    {
+        return $this->render('produits/indexFront.html.twig', [
+            'produits' => $produitsRepository->findAll(),
+            'categories' => $categoriesRepository->findAll(),
+        ]);
+    }
+
     #[Route('/new', name: 'app_produits_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ProduitsRepository $produitsRepository): Response
+    public function new(Request $request, ProduitsRepository $produitsRepository, SluggerInterface $slugger): Response
     {
         $produit = new Produits();
         $form = $this->createForm(ProduitsType::class, $produit);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $uploadFile=$form['Image']->getData();
+            $filename=md5(uniqid()).'.'.$uploadFile->guessExtension();//cryptage d image
+
+
+            $uploadFile->move($this->getParameter('kernel.project_dir').'/public/uploads/produit_image',$filename);
+            $produit->setImage($filename);
             $produitsRepository->save($produit, true);
 
             return $this->redirectToRoute('app_produits_index', [], Response::HTTP_SEE_OTHER);
@@ -55,6 +74,13 @@ class ProduitsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $uploadFile=$form['Image']->getData();
+            $filename=md5(uniqid()).'.'.$uploadFile->guessExtension();//cryptage d image
+
+
+            $uploadFile->move($this->getParameter('kernel.project_dir').'/public/uploads/produit_image',$filename);
+            $produit->setImage($filename);
+
             $produitsRepository->save($produit, true);
 
             return $this->redirectToRoute('app_produits_index', [], Response::HTTP_SEE_OTHER);
