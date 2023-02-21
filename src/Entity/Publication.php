@@ -19,15 +19,17 @@ class Publication
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-   
-
+    #[Assert\Length(min:12,minMessage: "Too short!")]
+    #[Assert\Length(max:140,maxMessage: "Too long!")]
     private ?string $ContenuPub = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]    
     private ?\DateTimeInterface $DatePub = null;
 
     #[ORM\Column(length: 255)]
-    
+    #[Assert\Length(min:4,minMessage: "Title is too short!")]
+    #[Assert\Length(max:20,maxMessage: "Title is too long!")]
+
     private ?string $CodePub = null;
 
     #[ORM\Column(length: 255)]

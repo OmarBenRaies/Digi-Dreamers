@@ -50,6 +50,17 @@ public function list(ManagerRegistry $doctrine): Response
         return $this->redirectToRoute('listcom');
     }
 
+    #[Route('/deletecom2/{id}',name: 'deletecom2')]
+    public function delete2 (ManagerRegistry $doctrine,$id):Response
+    {  
+        $repository=$doctrine->getRepository(Commentaire::class);
+        $commentaire=$repository->find($id);
+        $em=$doctrine->getManager();
+        $em->remove($commentaire);
+        $em->flush();
+        return $this->redirectToRoute('listpub');
+    }
+
     #[Route('/addcom',name:'addcom')]
     public function add (HttpFoundationRequest $request,ManagerRegistry $doctrine): Response
     {
@@ -57,9 +68,8 @@ public function list(ManagerRegistry $doctrine): Response
         $commentaires=$repository->findAll();
         $commentaire=new Commentaire;
         $form=$this->createForm(CommentaireType::class,$commentaire);
-        $form->add('add',SubmitType::class);
         $form->handleRequest($request);
-        if ($form->isSubmitted())
+            if ($form->isSubmitted()&&$form->isValid())
         {
             $em=$doctrine->getManager();
             $em->persist($commentaire);
@@ -77,9 +87,9 @@ public function list(ManagerRegistry $doctrine): Response
         $commentaire=new Commentaire;
         $commentaire->setPublication($publicationRepository->find($id));
         $form=$this->createForm(CommentaireType::class,$commentaire);
-        $form->add('add',SubmitType::class);
+    
         $form->handleRequest($request);
-        if ($form->isSubmitted())
+        if ($form->isSubmitted()&&$form->isValid())
         {
             $em=$doctrine->getManager();
             $em->persist($commentaire);
@@ -98,15 +108,30 @@ public function list(ManagerRegistry $doctrine): Response
         $repository= $doctrine->getRepository(Commentaire::class);
         $commentaires=$repository->find($id);
        $form=$this->createForm(CommentaireType::class,$commentaires);
-       $form->add('edit',SubmitType::class);
        $form->handleRequest($request);
-       if($form->isSubmitted())
+       if ($form->isSubmitted()&&$form->isValid())
        {
         $em=$doctrine->getManager();
         $em->flush();
-        return $this->redirectToRoute('addcom');
+        return $this->redirectToRoute('listcom');
        }
        return $this->renderForm('commentaire/editcom.html.twig',['formC'=>$form,'commentaire' => $commentaires]);
+    }
+
+    #[Route('/editcom2/{id}', name: 'editcom2')]
+    public function edit2(HttpFoundationRequest $request,ManagerRegistry $doctrine,$id ): Response
+    {  
+        $repository= $doctrine->getRepository(Commentaire::class);
+        $commentaires=$repository->find($id);
+       $form=$this->createForm(CommentaireType::class,$commentaires);
+       $form->handleRequest($request);
+       if ($form->isSubmitted()&&$form->isValid())
+       {
+        $em=$doctrine->getManager();
+        $em->flush();
+        return $this->redirectToRoute('listpub');
+       }
+       return $this->renderForm('commentaire/editcomfront.html.twig',['formC'=>$form,'commentaire' => $commentaires]);
     }
 }
 

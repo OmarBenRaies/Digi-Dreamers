@@ -66,9 +66,9 @@
 
                         {% for publication in publication %}
             <tr>
-                <td>{{ publication.id }}</td>
-                <td>{{ publication.ContenuPub }}</td>
                 <td>{{ publication.CodePub }}</td>
+                <td>{{ publication.ContenuPub }}</td>
+                <td>{{ publication.DatePub|date('d-m-y')}}</td>
 <td><img style="width: 350px;" src="{{ asset('uploadsforum/imagespublication/'~publication.UrlImagePub) }}" alt=""> </td>
                 
                 <td><a href="{{ path ('editpub',{'id':publication.id}) }}">edit</a></td>

@@ -63,7 +63,6 @@ public function list3(ManagerRegistry $doctrine): Response
         $publications=$repository->findAll();
         $publication=new Publication;
         $form=$this->createForm(PublicationType::class,$publication);
-        $form->add('add',SubmitType::class);
         $form->handleRequest($request);
        // if ($form->isSubmitted())
         {
@@ -128,6 +127,17 @@ public function list(ManagerRegistry $doctrine): Response
         $em=$doctrine->getManager();
         $em->remove($publication);
         $em->flush();
+        return $this->redirectToRoute('back');
+    }
+
+    #[Route('/deletepub2/{id}',name: 'deletepub2')]
+    public function delete2 (ManagerRegistry $doctrine,$id):Response
+    {  
+        $repository=$doctrine->getRepository(Publication::class);
+        $publication=$repository->find($id);
+        $em=$doctrine->getManager();
+        $em->remove($publication);
+        $em->flush();
         return $this->redirectToRoute('listpub');
     }
 
@@ -139,7 +149,6 @@ public function list(ManagerRegistry $doctrine): Response
         $publications=$repository->findAll();
         $publication=new Publication;
         $form=$this->createForm(PublicationType::class,$publication);
-        $form->add('add',SubmitType::class);
         $form->handleRequest($request);
        // if ($form->isSubmitted())
         {
@@ -191,13 +200,12 @@ public function list(ManagerRegistry $doctrine): Response
        $repository= $doctrine->getRepository(Publication::class);
      $publications=$repository->find($id);
        $form=$this->createForm(Publicationtype::class,$publications);
-       $form->add('edit',SubmitType::class);
        $form->handleRequest($request);
-       if($form->isSubmitted())
+       if ($form->isSubmitted()&&$form->isValid())
        {
         $em=$doctrine->getManager();
         $em->flush();
-        return $this->redirectToRoute('addpubback');
+        return $this->redirectToRoute('back');
        }
        return $this->renderForm('publication/editpub.html.twig',['formP'=>$form,'publication' => $publications]);
    }
@@ -208,9 +216,8 @@ public function list(ManagerRegistry $doctrine): Response
        $repository= $doctrine->getRepository(Publication::class);
      $publications=$repository->find($id);
        $form=$this->createForm(Publicationtype::class,$publications);
-       $form->add('edit',SubmitType::class);
        $form->handleRequest($request);
-       if($form->isSubmitted())
+       if ($form->isSubmitted()&&$form->isValid())
        {
         $em=$doctrine->getManager();
         $em->flush();
