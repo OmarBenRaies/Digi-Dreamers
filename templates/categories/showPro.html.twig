@@ -1,5 +1,7 @@
-{% extends "front/base.html.twig" %}
+<!--FRONT CATEGORIES!-->
 
+{% extends "front/base.html.twig" %}
+<!--Boucle for sur categories!-->
 {% block nav %}
 {% for c in categories %}
  <li><a href="{{path('app_categories_showPro',{'id':c.id})}}">{{c.getNomCat()}}</a></li>
@@ -18,7 +20,7 @@
                             <div class="properties pb-30">
                                 <div class="properties-card">
                                     <div class="properties-img">
-                                        <a href="pro-details.html"><img src="{{ asset('uploads/produit_image/')~p.getImage() }}" alt=""></a>
+                                        <a href="pro-details.html"><img src="{{ asset('uploads/produit_image/')~p.getImage() }}" alt="" style="width:180px ; height:160px"></a>
                                         <div class="socal_icon">
                                             <a href="#"><i class="ti-shopping-cart"></i></a>
                                             <a href="#"><i class="ti-heart"></i></a>

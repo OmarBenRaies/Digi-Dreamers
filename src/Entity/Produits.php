@@ -15,11 +15,11 @@ class Produits
     #[ORM\Column ]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255)] //Controle de saisie sur ref
     #[Assert\Length(min:4,minMessage:"Veuillez entrer une reference de minimum 4 caractères")]
     private ?string $ref = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255)] //Controle de saisie sur description
     #[Assert\Length(min:4,minMessage:"Veuillez entrer une description de minimum 10 caractères")]
    
     private ?string $Description = null;

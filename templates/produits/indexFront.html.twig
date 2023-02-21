@@ -1,5 +1,5 @@
 {% extends "front/base.html.twig" %}
-
+<!--Boucle for sur categories!-->
 {% block nav %}
 {% for c in categories %}
  <li><a href="{{path('app_categories_showPro',{'id':c.id})}}">{{c.getNomCat()}}</a></li>

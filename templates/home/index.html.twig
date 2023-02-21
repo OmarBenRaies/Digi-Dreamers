@@ -1,6 +1,6 @@
 {% extends 'front/base.html.twig' %}
 
-
+<!--GENERATION DES CATEGORIES D'APRES LA BD!-->
  
 {% block nav %}
 {% for c in categories %}
@@ -45,52 +45,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-
-        <section class="items-product1 pt-30">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-items mb-20">
-                            <div class="items-img">
-                                <img src="{{ asset('assets/img/gallery/items1.jpg') }}" alt="">
-                            </div>
-                            <div class="items-details">
-                                <h4><a href="pro-details.html">Visage</a></h4>
-                                <a href="pro-details.html" class="browse-btn">Acheter maintenant! </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-items mb-20">
-                            <div class="items-img">
-                                <img src="{{ asset('assets/img/gallery/items2.jpg') }}" alt="">
-                            </div>
-                            <div class="items-details">
-                                <h4><a href="pro-details.html">Corps</a></h4>
-                                <a href="pro-details.html" class="browse-btn">Acheter maintenant!</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-items mb-20">
-                            <div class="items-img">
-                                <img src="{{ asset('assets/img/gallery/items3.jpg') }}" alt="">
-                            </div>
-                            <div class="items-details">
-                                <h4><a href="pro-details.html">Cheveux</a></h4>
-                                <a href="pro-details.html" class="browse-btn">Acheter maintenant!</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <div class="latest-items section-padding fix">
+          </div>
+                 
+         
+         <div class="latest-items section-padding fix">
             <div class="container">
                 <div class="row justify-content-between">
                     <div class="col-xl-12">
@@ -100,34 +58,25 @@
                                 <div class="nav-tittle">
                                     <h2>Tendance</h2>
                                 </div>
-                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a class="nav-link active" id="nav-one-tab" data-bs-toggle="tab" href="#nav-one"
-                                       role="tab" aria-controls="nav-one" aria-selected="true">Visage</a>
-                                    <a class="nav-link" id="nav-two-tab" data-bs-toggle="tab" href="#nav-two" role="tab"
-                                       aria-controls="nav-two" aria-selected="false">Corps</a>
-                                    <a class="nav-link" id="nav-three-tab" data-bs-toggle="tab" href="#nav-three"
-                                       role="tab" aria-controls="nav-three" aria-selected="false">Cheveux</a>
-                                    <a class="nav-link" id="nav-four-tab" data-bs-toggle="tab" href="#nav-four"
-                                       role="tab" aria-controls="nav-four" aria-selected="false">Hygiéne</a>
-                                </div>
+                                
                             </nav>
 
                         </div>
                     </div>
                 </div>
             </div>
-            
             <div class="container">
                
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-one" role="tabpanel" aria-labelledby="nav-one-tab">
 
                         <div class="latest-items-active">
+                        <!--Boucle for sur produits!-->
                              {% for p in produits %}
                             <div class="properties pb-30">
                                 <div class="properties-card">
                                     <div class="properties-img">
-                                        <a href="pro-details.html"><img src="{{ asset('uploads/produit_image/')~p.getImage() }}" alt=""></a>
+                                        <a href="pro-details.html"><img src="{{ asset('uploads/produit_image/')~p.getImage() }}" alt="" style="width:180px ; height:160px"></a>
                                         <div class="socal_icon">
                                             <a href="#"><i class="ti-shopping-cart"></i></a>
                                             <a href="#"><i class="ti-heart"></i></a>
@@ -153,14 +102,12 @@
                     </div>
                     
                 </div>
-                 
-            
-
-                            </section>
+         </div>
+         </section>
 
 
-        <section class="home-blog">
-            <div class="container">
+                  <section class="home-blog">
+                <div class="container">
                 <div class="row justify-content-center">
                     <div class="cl-xl-7 col-lg-8 col-md-10">
 
@@ -215,10 +162,10 @@
                     </div>
                 </div>
             </div>
-        </section>
+              </section>
 
 
-        <div class="categories-area">
+         <div class="categories-area">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-6">
@@ -272,6 +219,6 @@
                 </div>
             </div>
         </div>
-
+      </section>
     </main>
 {% endblock %}
