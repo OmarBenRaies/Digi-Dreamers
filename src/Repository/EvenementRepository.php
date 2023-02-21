@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Evenement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -49,6 +50,42 @@ class EvenementRepository extends ServiceEntityRepository
 
         return $queryBuilder->getQuery()->getResult();
     }
+
+    public function selectEvents()
+    {
+        $dateActuelle = new \DateTimeImmutable();
+
+        $qb = $this->createQueryBuilder('e')
+            ->where('e.date > :dateActuelle')
+            ->orderBy('e.date', 'ASC')
+            ->setMaxResults(3)
+            ->setParameter('dateActuelle', $dateActuelle);
+
+        $query = $qb->getQuery();
+        $resultats = $query->getResult();
+
+        return $resultats;
+    }
+
+
+    public function selectEvents1()
+    {
+
+
+        $qb = $this->createQueryBuilder('e')
+            ->orderBy('e.date', 'DESC');
+
+
+        $query = $qb->getQuery();
+        $resultats = $query->getResult();
+
+        return $resultats;
+    }
+
+
+
+
+
 
 
 //    /**

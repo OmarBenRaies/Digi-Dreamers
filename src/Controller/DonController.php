@@ -72,15 +72,23 @@ class DonController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_don_delete', methods: ['POST'])]
-    public function delete(Request $request, Don $don, DonRepository $donRepository): Response
+    #[Route('/delete/{id}', name: 'app_don_delete')]
+    public function delete(Request $request, $id): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$don->getId(), $request->request->get('_token'))) {
-            $donRepository->remove($don, true);
-        }
+        $don= $this->getDoctrine()->getRepository(Don::class)->find($id);
 
-        return $this->redirectToRoute('app_don_index', [], Response::HTTP_SEE_OTHER);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($don);
+        $entityManager->flush();
+        $response = new Response();
+        $response->send();
+        return $this->redirectToRoute('app_don_index');
+
     }
+
+
+
 
     #[Route('/Total/all', name: 'app_don_total')]
     public function getEventTotal(Request $request, EvenementRepository $eventRepository)

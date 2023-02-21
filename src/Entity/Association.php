@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: AssociationRepository::class)]
 class Association
@@ -17,9 +19,12 @@ class Association
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le nom est Obligatoire")]
+
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(min: "20",minMessage: "La description doit etre composé au minimum de 20 carateres")]
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'association', targetEntity: Don::class)]

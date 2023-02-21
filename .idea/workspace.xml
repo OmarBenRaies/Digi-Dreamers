@@ -4,24 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab0ef236-6ca6-4d9f-9e87-735b983cc1cb" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/templates/association/mypdf.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Digi-Dreamers.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Digi-Dreamers.iml" afterDir="false" />
+    <list default="true" id="ab0ef236-6ca6-4d9f-9e87-735b983cc1cb" name="Changes" comment="Update Don">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/AssociationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AssociationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DonController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DonController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/EvenementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EvenementController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Don.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Don.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Association.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Association.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Evenement.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Evenement.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/EvenementRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/EvenementRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/association/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/association/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/association/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/association/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/association/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/association/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/back/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/back/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/back/sidebar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/back/sidebar.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/evenement/frontShow.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/evenement/frontShow.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/evenement/index2.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/evenement/index2.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/evenement/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/evenement/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/don/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/don/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/don/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/don/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/header.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/header.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,7 +232,7 @@
       <workItem from="1676162818183" duration="3465000" />
       <workItem from="1676167363371" duration="9954000" />
       <workItem from="1676232115725" duration="81000" />
-      <workItem from="1676232198589" duration="127855000" />
+      <workItem from="1676232198589" duration="139385000" />
     </task>
     <task id="LOCAL-00001" summary="controle de saisie">
       <created>1676376886232</created>
@@ -253,7 +248,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676429736823</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Update Don">
+      <created>1676867626102</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1676867626102</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,6 +275,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="controle de saisie" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="Update Don" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Don" />
   </component>
 </project>

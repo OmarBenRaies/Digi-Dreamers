@@ -67,7 +67,7 @@ class AssociationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_association_delete')]
+    #[Route('/{id}', name: 'app_association_delete', methods: ['GET', 'POST'])]
     public function delete(Request $request, $id) {
         $association= $this->getDoctrine()->getRepository(Association::class)->find($id);
 

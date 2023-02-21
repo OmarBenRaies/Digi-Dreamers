@@ -52,7 +52,7 @@
                                 <thead>
                                 <tr>
                                     <th>Nom</th>
-                                    <th>Description</th>
+
 
                                 </tr>
                                 </thead>
@@ -61,7 +61,7 @@
                                     <tr>
 
                                         <td>{{ p.nom }} <i class="fa fa-trash"></i></td>
-                                        <td>{{ p.description }}</td>
+
                                         <td> <a href={{ path('app_association_show',{'id':p.id })}}><button class="btn-dark">Show </button>  </a></td>
                                         <td> <a href={{ path('app_association_edit',{'id':p.id })}}><button class="btn-success">Modifier </button> <i class="fa fa-trash"></i> </a></td>
 

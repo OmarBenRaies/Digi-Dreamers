@@ -16,7 +16,7 @@ class HomeController extends AbstractController
     public function index(EvenementRepository $evenementRepository): Response
     {
         return $this->render('home/index.html.twig', [
-        'evenements' => $evenementRepository->findAll(),
+        'evenements' => $evenementRepository->selectEvents(),
     ]);
     }
 }

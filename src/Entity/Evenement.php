@@ -17,29 +17,32 @@ class Evenement
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\GreaterThanOrEqual("today",message: "date not valid")]
+   // #[Assert\GreaterThanOrEqual("today",message: "Le date n'est pas valide")]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le lieu est Obligatoire")]
     private ?string $lieu = null;
 
     #[Assert\Positive]
     #[ORM\Column]
+    #[Assert\NotBlank(message: "Le nombre de place est Obligatoire")]
     private ?int $nbr_participant = null;
 
-    #[Assert\Length(min: 4,minMessage: "Titre is short!!!!")]
+    #[Assert\Length(min: 3,minMessage: "Le titre doit etre composé au minimum de 3 carateres")]
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
-    #[Assert\Length(min: 20,minMessage: "Description is short!!!!")]
+    #[Assert\Length(min: 20,minMessage: "La description doit etre composé au minimum de 20 carateres")]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
     private ?float $total = null;
 
-    #[Assert\Positive]
+    #[Assert\Positive(message: "Le prix doit etre positif")]
     #[ORM\Column]
+    #[Assert\NotBlank(message: "Le prix est Obligatoire")]
     private ?float $prix = null;
 
     #[ORM\Column(length: 255)]

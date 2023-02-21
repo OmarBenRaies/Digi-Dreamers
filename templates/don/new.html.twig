@@ -89,19 +89,19 @@
     </div>
     <script>
         $(function() {
-            // Add an event listener to the event select field
+            // event listener to the event select field
             $('.event-select').on('change', function() {
                 var eventId = $(this).val();
-                // Make an AJAX request to the server to get the price of the selected event
+                // AJAX request to the server to get the price of the selected event
                 $.ajax({
-                    url: '{{ path('app_don_total') }}', // replace with the URL of your controller action
+                    url: '{{ path('app_don_total') }}',
                     data: {
                         'id': eventId,
                     },
                     success: function(total) {
                         $('input[name="{{ f.somme.vars.full_name }}"]').val(total.total); // set the value of the price input field
 
-                        console.log("heyyyyyy id ",eventId);
+
                     },
                     error: function(xhr, status, error) {
                         console.log(error); // log any errors to the console
