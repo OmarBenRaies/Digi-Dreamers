@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\User\LoginFormType;
 use App\Form\User\LoginType;
 use App\Form\User\UpdateType;
 use App\Form\User\UserType;
@@ -11,17 +12,21 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UserController extends AbstractController
 {
 
+    
 #[Route('/signup', name: 'app_add_user')]
-public function Add(Request $request,ManagerRegistry $doctrine,ValidatorInterface $validator,UserRepository $userRepository): Response
+public function Add(Request $request,ManagerRegistry $doctrine,ValidatorInterface $validator,UserRepository $userRepository,UserPasswordHasherInterface $passwordHasher): Response
 {
     $user=new User();
     $user->setVerified(0);
+    $user->setRoles(['ROLE_USER']);
     $Form=$this->createForm(UserType::class,$user);
     $Form->handleRequest($request);
 
@@ -57,6 +62,15 @@ public function Add(Request $request,ManagerRegistry $doctrine,ValidatorInterfac
             ));
         }
 
+        $plaintextPassword = $user->getPassword();
+
+        // hash the password (based on the security.yaml config for the $user class)
+        $hashedPassword = $passwordHasher->hashPassword(
+            $user,
+            $plaintextPassword
+        );
+        $user->setPassword($hashedPassword);
+
         $em->persist($user);
         $em->flush();
 
@@ -73,50 +87,52 @@ public function Add(Request $request,ManagerRegistry $doctrine,ValidatorInterfac
     ));
 }
 
-#[Route('/login', name: 'app_login')]
-public function Login(Request $request,UserRepository $userRepository,ValidatorInterface $validator): Response
+
+    #[Route('/logout', name: 'app_logout')]
+    public function logout(): void
     {
-        $user=new User();
-        $loginForm=$this->createForm(LoginType::class,$user);
-        $loginForm->handleRequest($request);
+        // This method is empty, since Symfony's logout functionality is handled automatically by the security system.
+    }
 
-        $errors = $validator->validate($user);
+    #[Route('/login', name: 'app_login')]
+    public function login(Request $request, UserRepository $userRepository,AuthenticationUtils $authenticationUtils, UserPasswordHasherInterface $passwordHasher)
+    {
+        $user = new User();
+        $form = $this->createForm(LoginFormType::class, $user);
 
-        if(count($errors) > 0){
-            return $this->render('user/login.html.twig', array(
-                'loginform'=>$loginForm->createView(),
-                'errors'=>$errors
-            ));
-        }
+        $form->handleRequest($request);
 
-        if ($loginForm->isSubmitted()&&$loginForm->isValid())/*verifier */
-        {
-            $userInDb = $userRepository->findOneBy(['email' => $user->getEmail()]);
-            if(!$userInDb){
-                return $this->render('user/login.html.twig', array(
-                    'loginform'=>$loginForm->createView(),
-                    'errors'=>array(),
-                    'message'=>"Utilisateur non trouvé dans notre base de données"
-                ));
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $user = $userRepository->findOneBy(['email' => $user->getEmail()]);
+
+            if (!$user) {
+                $this->addFlash('danger', 'Email address not found');
+                return $this->redirectToRoute('app_login');
             }
 
-            if($userInDb->getPassword() != $user->getPassword()){
-                return $this->render('user/login.html.twig', array(
-                    'loginform'=>$loginForm->createView(),
-                    'errors'=>array(),
-                    'message'=>"Mot de passe incorrect"
-                ));
+            if (!$passwordHasher->isPasswordValid($user, $user->getPassword())) {
+                $this->addFlash('danger', 'Invalid password');
+                return $this->redirectToRoute('app_login');
             }
-            if($userInDb->getRole() == "admin"){
-                return $this->redirectToRoute('app_dashboard');
-            }
+
+            // Authentication successful
+            $this->addFlash('success', 'Welcome '.$user->getEmail());
             return $this->redirectToRoute('app_home');
         }
 
-        return $this->render('user/login.html.twig', array(
-            'loginform'=>$loginForm->createView(),
-            'errors'=>array()
-        ));
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('user/login.html.twig', [
+            'lastUsername'=> $lastUsername,
+            'error' => $error,
+        ]);
+    }
+
+    #[Route('/access-denied', name: 'access_denied')]
+    public function accessDenied(){
+        return $this->render('user/access_denied.html.twig');
     }
 
 #[Route('/dashboard/users', name: 'app_users_admin')]
