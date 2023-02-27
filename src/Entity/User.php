@@ -8,10 +8,14 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+
 /**
  * @method string getUserIdentifier()
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[Vich\Uploadable]
 class User implements UserInterface,PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -51,8 +55,6 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     )]
     private ?string $cin = null;
 
-    //#[ORM\Column(length: 255)]
-    //private ?string $role = null;
 
 
     #[ORM\Column(type:"json")]
@@ -60,6 +62,22 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?int $verified = null;
+
+    #[ORM\Column(nullable: true, options: ["default" => ""])]
+    private ?string $image;
+
+    #[Vich\UploadableField(mapping:"user_images", fileNameProperty:"image")]
+    private File $imageFile;
+
+    #[ORM\Column(type:"datetime",options: ["default" => "CURRENT_TIMESTAMP"])]
+    private \DateTime $updatedAt;
+
+
+    public function __construct()
+    {
+        $this->updatedAt = new \DateTime();
+        $this->image = '';
+    }
 
     public function getId(): ?int
     {
@@ -194,5 +212,48 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     {
         return $this->email;
     }
+
+
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+        if ($image) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt(): \DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt(\DateTime $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+
 
 }

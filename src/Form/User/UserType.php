@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class UserType extends AbstractType
 {
@@ -23,6 +24,9 @@ class UserType extends AbstractType
 
             ->add('telephone')
             ->add('cin')
+            ->add('imageFile', VichImageType::class, array(
+                'required' => false,
+            ))
             ->add('submit',SubmitType::class);
         ;
     }
