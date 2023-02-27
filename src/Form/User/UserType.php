@@ -23,13 +23,6 @@ class UserType extends AbstractType
 
             ->add('telephone')
             ->add('cin')
-            ->add('role', ChoiceType::class, array(
-                'choices' => array(
-                    'client' => 'client',
-                    'admin' =>  'admin',
-                    'conseiller' => 'conseiller',
-                )
-            ))
             ->add('submit',SubmitType::class);
         ;
     }
