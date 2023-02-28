@@ -24,20 +24,18 @@ class DonType extends AbstractType
                         ->andWhere('e.date < :currentDate')
                         ->setParameter('currentDate', new \DateTime())
                         ->orderBy('e.date', 'ASC');
-
                 },
                 'choice_label'=>'titre',
                 'label'=>'Evenement',
-
+                'required' => false,
             ])
             ->add('association',EntityType::class,['class'=> Association::Class,
                 'choice_label'=>'nom',
-
-
-                'label'=>'Association'])
+                'label'=>'Association',
+                'required' => false,
+                ])
         ;
     }
-
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

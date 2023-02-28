@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
 class Evenement
@@ -17,7 +18,7 @@ class Evenement
     #[ORM\Column]
     private ?int $id = null;
 
-   // #[Assert\GreaterThanOrEqual("today",message: "Le date n'est pas valide")]
+    //#[Assert\GreaterThanOrEqual("today",message: "Le date n'est pas valide")]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
@@ -53,6 +54,12 @@ class Evenement
 
     #[ORM\OneToMany(mappedBy: 'evenement', targetEntity: Don::class)]
     private Collection $DonEvent;
+
+    #[ORM\Column(length: 255)]
+    private ?string $lat = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $lon = null;
 
     public function __construct()
     {
@@ -214,4 +221,30 @@ class Evenement
 
         return $this;
     }
+
+    public function getLat(): ?string
+    {
+        return $this->lat;
+    }
+
+    public function setLat(string $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLon(): ?string
+    {
+        return $this->lon;
+    }
+
+    public function setLon(string $lon): self
+    {
+        $this->lon = $lon;
+
+        return $this;
+    }
+
+
 }

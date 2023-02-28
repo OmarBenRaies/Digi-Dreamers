@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "dropify": "^0.2.2"
+    "dropify": "^0.2.2",
+    "leaflet": "^1.9.3"
   }
 }

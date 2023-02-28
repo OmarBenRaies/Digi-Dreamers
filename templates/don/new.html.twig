@@ -92,7 +92,7 @@
             // event listener to the event select field
             $('.event-select').on('change', function() {
                 var eventId = $(this).val();
-                // AJAX request to the server to get the price of the selected event
+                // AJAX request to the server
                 $.ajax({
                     url: '{{ path('app_don_total') }}',
                     data: {

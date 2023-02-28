@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 #[Route('/association')]
 class AssociationController extends AbstractController
 {
@@ -82,6 +83,8 @@ class AssociationController extends AbstractController
     #[Route('/event/facture/{id}', name: 'show_pdf')]
     public function generatePdfAction($id)
     {
+
+
         $em = $this->getDoctrine()->getManager();
         $association = $em->getRepository(Association::class)->find($id);
 
@@ -100,7 +103,7 @@ class AssociationController extends AbstractController
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
 
-        $filename = 'your_pdf_file.pdf';
+        $filename = 'Reçu-'.$association->getNom().'.pdf';
 
         return new Response(
             $dompdf->output(),

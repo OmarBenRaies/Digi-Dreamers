@@ -4,18 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab0ef236-6ca6-4d9f-9e87-735b983cc1cb" name="Changes" comment="Update Don">
+    <list default="true" id="ab0ef236-6ca6-4d9f-9e87-735b983cc1cb" name="Changes" comment="Update Don,Association,Evenement">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Digi-Dreamers.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Digi-Dreamers.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/AssociationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AssociationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DonController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DonController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/EvenementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EvenementController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Association.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Association.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Evenement.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Evenement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/EvenementRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/EvenementRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/association/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/association/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/don/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/don/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/DonType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/DonType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/back/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/back/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/don/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/don/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/evenement/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/evenement/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/evenement/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/evenement/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/evenement/frontShow.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/evenement/frontShow.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/front/header.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/header.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -232,7 +236,12 @@
       <workItem from="1676162818183" duration="3465000" />
       <workItem from="1676167363371" duration="9954000" />
       <workItem from="1676232115725" duration="81000" />
-      <workItem from="1676232198589" duration="139385000" />
+      <workItem from="1676232198589" duration="142914000" />
+      <workItem from="1677099094631" duration="861000" />
+      <workItem from="1677193664933" duration="943000" />
+      <workItem from="1677253552049" duration="2030000" />
+      <workItem from="1677428340551" duration="2164000" />
+      <workItem from="1677525609930" duration="25390000" />
     </task>
     <task id="LOCAL-00001" summary="controle de saisie">
       <created>1676376886232</created>
@@ -255,7 +264,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676867626102</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Update Don,Association,Evenement">
+      <created>1676985029200</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1676985029200</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -276,6 +292,7 @@
     <MESSAGE value="controle de saisie" />
     <MESSAGE value="update" />
     <MESSAGE value="Update Don" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Don" />
+    <MESSAGE value="Update Don,Association,Evenement" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Don,Association,Evenement" />
   </component>
 </project>

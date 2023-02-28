@@ -17,5 +17,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="jquery-3.6.0" level="application" />
+    <orderEntry type="library" name="leaflet" level="application" />
+    <orderEntry type="library" name="leaflet-control-geocoder" level="application" />
+    <orderEntry type="library" name="leaflet-search" level="application" />
+    <orderEntry type="library" name="echarts" level="application" />
   </component>
 </module>

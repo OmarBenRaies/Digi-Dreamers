@@ -22,6 +22,8 @@
     <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="{{asset('back-assets/assets/vendor/fonts/boxicons.css')}}" />
 
+
+
     <!-- Core CSS -->
     <link id="core-link" rel="stylesheet" href="{{asset('back-assets/assets/vendor/css/core.css')}}" class="template-customizer-core-css" />
     <link id="theme-link" rel="stylesheet" href="{{asset('back-assets/assets/vendor/css/theme-default.css')}}" class="template-customizer-theme-css" />
@@ -32,6 +34,14 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{asset('back-assets/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
     <link rel="stylesheet" href="{{asset('back-assets/assets/vendor/libs/apex-charts/apex-charts.css')}}" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+          integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+          crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha384-vwvQzWbPqwZd+tvDRtjbbChuV7gNqy60qVOrQYrL+u/7zMWjsTLBfVbFkGCOALbm" crossorigin="">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-search@2.9.5/dist/leaflet-search.min.css" integrity="sha384-SBnIyjMshYfrwfnZz/PxPbI6ZfL+EOsmy4LOsU6XsU/L+R11dPbYuS56ycx6x98a" crossorigin="">
 
 
     <!-- Helpers -->
@@ -139,8 +149,15 @@
 
 <!-- Main JS -->
 <script src="{{ asset('back-assets/assets/js/main.js')}}"></script>
-
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+        crossorigin=""></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha384-6NqT3TawM2vL1ycXukX0pgMBndKyzj/RkPMwPYJNhONmlzZm/t0zoIefonvK5yt5" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet-search@2.9.5/dist/leaflet-search.min.js" integrity="sha384-x9HGL1q7OX50Qw10C+7z1clpEgSP7VZJGnX9i1jK7IYpObPfplJx8zKj/SiAV1Iz" crossorigin=""></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 
 </body>
-
+{% block javascripts %}
+{% endblock %}
 </html>

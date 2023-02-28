@@ -36,9 +36,15 @@ class EvenementController extends AbstractController
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
 
+       // dd($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $latitude = $request->request->get('latitude');
+            $longitude = $request->request->get('longitude');
+            $evenement->setLat($latitude);
+            $evenement->setLon($longitude);
 
             // uploads image
+      //
             $uploadFile=$form['url_image']->getData();
             $filename=md5(uniqid()).'.'.$uploadFile->guessExtension();//cryptage d image
 
@@ -74,6 +80,11 @@ class EvenementController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $latitude = $request->request->get('latitude');
+            $longitude = $request->request->get('longitude');
+            $evenement->setLat($latitude);
+            $evenement->setLon($longitude);
 
             // uploads image
             $uploadFile=$form['url_image']->getData();
@@ -133,7 +144,7 @@ class EvenementController extends AbstractController
         $usr = $em->getRepository(User::class)->find(1);
         if ($event->getNbrParticipant() > 0) {
             $event->setNbrParticipant($event->getNbrParticipant() - 1) ;
-            $event->addUser($usr);
+                $event->addUser($usr);
             $event->setTotal($event->getTotal() + $event->getPrix());
             $em->flush();
 
