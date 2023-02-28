@@ -15,7 +15,7 @@ class HomeController extends AbstractController
 {
 
     #[Route('/home',name:'app_home')]
-    public function index(): Response
+    public function index(ManagerRegistry $doctrine): Response
     {
         $repository= $doctrine->getRepository(Publication::class);
     $publications=$repository->findAll();
