@@ -14,10 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
 class HomeController extends AbstractController
 {
 
-    /**
-     * @Route("/home", name="app_home")
-     */
-    public function index(ManagerRegistry $doctrine): Response
+    #[Route('/home',name:'app_home')]
+    public function index(): Response
     {
         $repository= $doctrine->getRepository(Publication::class);
     $publications=$repository->findAll();

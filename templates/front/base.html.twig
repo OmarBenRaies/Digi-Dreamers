@@ -55,15 +55,17 @@
         </div>
     </div>
 
-    {% include 'front/header.html.twig' %}
-
+    {% block header %}
+        {% include 'front/header.html.twig' %}
+    {% endblock %}
 
     {% block body %}
 
     {% endblock %}
 
-    {% include 'front/footer.html.twig' %}
-
+    {% block footer %}
+        {% include 'front/footer.html.twig' %}
+    {% endblock %}
 
         <script src="{{ asset('assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
         <script src="{{ asset('assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
