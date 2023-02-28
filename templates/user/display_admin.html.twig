@@ -44,10 +44,10 @@
                             </td>
 
                             <td>
-                                {% if(user.role=="admin") %}
-                                    <span class="badge bg-label-danger me-1">{{ user.role }}</span>
+                                {% if(user.roles[0]=="admin") %}
+                                    <span class="badge bg-label-danger me-1">Admin</span>
                                 {% else %}
-                                    <span class="badge bg-label-primary me-1">{{ user.role }}</span>
+                                    <span class="badge bg-label-primary me-1">User</span>
                                 {% endif %}
 
                             </td>
