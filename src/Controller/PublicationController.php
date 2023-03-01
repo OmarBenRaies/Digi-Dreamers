@@ -3,20 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\Commentaire;
+use App\Entity\Publication;
+use App\Form\CommentaireType;
+use App\Form\PublicationType;
+use App\Repository\PublicationRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\PublicationRepository;
-use App\Entity\Publication;
-use App\Form\PublicationType;
-use App\Form\CommentaireType;
-
-use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 
 
 
@@ -109,10 +109,17 @@ public function list3(ManagerRegistry $doctrine): Response
     }
 
 #[Route('/listpub', name: 'listpub')]
-public function list(ManagerRegistry $doctrine): Response
+public function list(ManagerRegistry $doctrine,Request $request,PaginatorInterface $paginator,): Response
 {
     $repository= $doctrine->getRepository(Publication::class);
     $publications=$repository->findAll();
+    
+
+    $publications = $paginator->paginate(
+        $publications, /* query NOT result */
+        $request->query->getInt('page', 1), /*page number*/
+        2 /*limit per page*/
+    );
     return $this->render('publication/listpub.html.twig', [
         'publication' => $publications,
     ]);
