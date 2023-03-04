@@ -10,6 +10,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\component\Validator\Constraints as Assert;
 
+
 #[ORM\Entity(repositoryClass: PublicationRepository::class)]
 class Publication
 {
@@ -38,10 +39,26 @@ class Publication
     #[ORM\OneToMany(mappedBy: 'Publication', targetEntity: Commentaire::class, orphanRemoval: true)]
     private Collection $commentaires;
 
+    #[ORM\Column]
+    private ?bool $all_day = null;
+
+    #[ORM\Column(length: 7)]
+    private ?string $background_color = null;
+
+    #[ORM\Column(length: 7)]
+    private ?string $border_color = null;
+
+    #[ORM\Column(length: 7)]
+    private ?string $text_color = null;
+
+    #[ORM\OneToMany(mappedBy: 'publication', targetEntity: PubLike::class, orphanRemoval: true)]
+    private Collection $Likes;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
         $this->DatePub=new \DateTime();
+        $this->Likes = new ArrayCollection();
     }
 
 
@@ -135,4 +152,95 @@ class Publication
         return $this->CodePub;
     
 }
+
+    public function isAllDay(): ?bool
+    {
+        return $this->all_day;
+    }
+    public function getAllDay(): ?bool
+    {
+        return $this->all_day;
+    }
+
+   
+    public function setAllDay(bool $all_day): self
+    {
+        $this->all_day = $all_day;
+
+        return $this;
+    }
+
+    public function getBackgroundColor(): ?string
+    {
+        return $this->background_color;
+    }
+
+    public function setBackgroundColor(string $background_color): self
+    {
+        $this->background_color = $background_color;
+
+        return $this;
+    }
+
+    public function getBorderColor(): ?string
+    {
+        return $this->border_color;
+    }
+
+    public function setBorderColor(string $border_color): self
+    {
+        $this->border_color = $border_color;
+
+        return $this;
+    }
+
+    public function getTextColor(): ?string
+    {
+        return $this->text_color;
+    }
+
+    public function setTextColor(string $text_color): self
+    {
+        $this->text_color = $text_color;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PubLike>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->Likes;
+    }
+
+    public function addLike(PubLike $like): self
+    {
+        if (!$this->Likes->contains($like)) {
+            $this->Likes->add($like);
+            $like->setPublication($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(PubLike $like): self
+    {
+        if ($this->Likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getPublication() === $this) {
+                $like->setPublication(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isLikedByUser(User $user): bool
+    {
+        foreach ($this->Likes as $like){
+            if ($like->getUser() === $user) return true;
+        }
+       return false;
+    }
 }

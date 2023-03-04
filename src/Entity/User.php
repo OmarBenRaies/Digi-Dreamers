@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -60,6 +62,14 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?int $verified = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: PubLike::class)]
+    private Collection $Likes;
+
+    public function __construct()
+    {
+        $this->Likes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -193,6 +203,36 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     public function getUsername()
     {
         return $this->email;
+    }
+
+    /**
+     * @return Collection<int, PubLike>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->Likes;
+    }
+
+    public function addLike(PubLike $like): self
+    {
+        if (!$this->Likes->contains($like)) {
+            $this->Likes->add($like);
+            $like->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(PubLike $like): self
+    {
+        if ($this->Likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getUser() === $this) {
+                $like->setUser(null);
+            }
+        }
+
+        return $this;
     }
 
 }
