@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\DonRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: DonRepository::class)]
 class Don
@@ -14,12 +15,18 @@ class Don
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Groups("dons")]
+
     private ?float $somme = null;
 
     #[ORM\ManyToOne(inversedBy: 'DonEvent')]
+    #[Groups("dons")]
+
     private ?Evenement $evenement = null;
 
     #[ORM\ManyToOne(inversedBy: 'dons')]
+    #[Groups("dons")]
+
     private ?Association $association = null;
 
 

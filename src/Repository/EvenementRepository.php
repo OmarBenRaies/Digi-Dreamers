@@ -82,6 +82,25 @@ class EvenementRepository extends ServiceEntityRepository
         return $resultats;
     }
 
+    public function chart_repository(){
+        return  $this->createQueryBuilder('r')
+            -> select('r.gouv, COUNT(r.id) as count')
+            ->groupBy('r.gouv')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
+    public function chartRepository()
+    {
+        $qb = $this->createQueryBuilder('r');
+
+        $qb->select('r.gouv, COUNT(r.id) as count')
+            ->groupBy('r.gouv');
+
+        return $qb->getQuery()->getResult();
+    }
 
 
 

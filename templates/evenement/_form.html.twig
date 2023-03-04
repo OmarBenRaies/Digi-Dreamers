@@ -167,6 +167,8 @@
 
 
     </div>
+
+
     <script type="text/javascript">
         $('.dropify').dropify({
             messages: {
@@ -200,16 +202,13 @@
 
                         markerMessage.style.display = "none";
                         let pos=e.latlng;
-                       // console.log(e);
                         console.log(pos);
                         marker.setLatLng(e.latlng);
 
-                    //   console.log("heyyyy",document.querySelector(".lng").value);
                         let url = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + pos.lat + '&lon=' + pos.lng;
                         fetch(url)
                             .then(response => response.json())
                             .then(data => {
-                                // The address is in the 'display_name' property of the response object
                                 console.log(data);
                                 let full_adress=data.address.county+", "+data.address.state+", "+data.address.country;
                                 document.querySelector(".lieu").value=full_adress;
@@ -235,10 +234,6 @@
             } catch (error) {
                 console.error(error);
             }
-
-
-
-
         </script>
 
     {% endblock %}

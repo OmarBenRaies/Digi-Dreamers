@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\dto\Pie;
 
 #[Route('/evenement')]
 class EvenementController extends AbstractController
@@ -40,6 +41,11 @@ class EvenementController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $latitude = $request->request->get('latitude');
             $longitude = $request->request->get('longitude');
+            $lieu=$evenement->getLieu();
+
+            $parts = explode(",", $lieu);
+            $governorate = trim($parts[1]);
+            $evenement->setGouv($governorate);
             $evenement->setLat($latitude);
             $evenement->setLon($longitude);
 
@@ -81,8 +87,13 @@ class EvenementController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+
             $latitude = $request->request->get('latitude');
             $longitude = $request->request->get('longitude');
+            $lieu=$evenement->getLieu();
+            $parts = explode(",", $lieu);
+            $governorate = trim($parts[1]);
+            $evenement->setGouv($governorate);
             $evenement->setLat($latitude);
             $evenement->setLon($longitude);
 
@@ -152,6 +163,7 @@ class EvenementController extends AbstractController
 
         return $this->redirectToRoute('app_evenement_frontShow',['id'=>$id], Response::HTTP_SEE_OTHER);
     }
+
 
 
 

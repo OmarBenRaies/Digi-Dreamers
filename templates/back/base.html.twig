@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html id="html-doc" lang="en" class="layout-navbar-fixed layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="./assets/">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <head>
     <meta charset="utf-8" />
@@ -39,9 +38,7 @@
           integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
           crossorigin=""/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha384-vwvQzWbPqwZd+tvDRtjbbChuV7gNqy60qVOrQYrL+u/7zMWjsTLBfVbFkGCOALbm" crossorigin="">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-search@2.9.5/dist/leaflet-search.min.css" integrity="sha384-SBnIyjMshYfrwfnZz/PxPbI6ZfL+EOsmy4LOsU6XsU/L+R11dPbYuS56ycx6x98a" crossorigin="">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/echarts@5.3.1/dist/echarts.min.css" />
 
 
     <!-- Helpers -->
@@ -152,12 +149,16 @@
 <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
         crossorigin=""></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha384-6NqT3TawM2vL1ycXukX0pgMBndKyzj/RkPMwPYJNhONmlzZm/t0zoIefonvK5yt5" crossorigin=""></script>
-<script src="https://unpkg.com/leaflet-search@2.9.5/dist/leaflet-search.min.js" integrity="sha384-x9HGL1q7OX50Qw10C+7z1clpEgSP7VZJGnX9i1jK7IYpObPfplJx8zKj/SiAV1Iz" crossorigin=""></script>
 <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.3.1/dist/echarts.min.js"></script>
 
 </body>
 {% block javascripts %}
+{% endblock %}
+{% block jsChart %}
 {% endblock %}
 </html>

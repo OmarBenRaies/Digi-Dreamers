@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -20,33 +21,49 @@ class Evenement
 
     //#[Assert\GreaterThanOrEqual("today",message: "Le date n'est pas valide")]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups("events")]
+
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Le lieu est Obligatoire")]
+    #[Groups("events")]
+
     private ?string $lieu = null;
 
     #[Assert\Positive]
     #[ORM\Column]
     #[Assert\NotBlank(message: "Le nombre de place est Obligatoire")]
+    #[Groups("events")]
+
     private ?int $nbr_participant = null;
 
     #[Assert\Length(min: 3,minMessage: "Le titre doit etre composé au minimum de 3 carateres")]
     #[ORM\Column(length: 255)]
+    #[Groups("events")]
+
     private ?string $titre = null;
     #[Assert\Length(min: 20,minMessage: "La description doit etre composé au minimum de 20 carateres")]
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups("events")]
+
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups("events")]
+
     private ?float $total = null;
 
     #[Assert\Positive(message: "Le prix doit etre positif")]
     #[ORM\Column]
     #[Assert\NotBlank(message: "Le prix est Obligatoire")]
+    #[Groups("events")]
+
     private ?float $prix = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("events")]
+
     private ?string $url_image = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'evenements')]
@@ -56,10 +73,17 @@ class Evenement
     private Collection $DonEvent;
 
     #[ORM\Column(length: 255)]
+    #[Groups("events")]
+
     private ?string $lat = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("events")]
+
     private ?string $lon = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $gouv = null;
 
     public function __construct()
     {
@@ -242,6 +266,18 @@ class Evenement
     public function setLon(string $lon): self
     {
         $this->lon = $lon;
+
+        return $this;
+    }
+
+    public function getGouv(): ?string
+    {
+        return $this->gouv;
+    }
+
+    public function setGouv(?string $gouv): self
+    {
+        $this->gouv = $gouv;
 
         return $this;
     }
