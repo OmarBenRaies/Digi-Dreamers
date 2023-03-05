@@ -76,6 +76,7 @@
 
         <!-- Components -->
         <!--<li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>-->
+      
 
         <li {% if app.request.attributes.get('_route') == 'app_users_admin' %} class="menu-item active" {% else %} class="menu-item" {% endif %} class="menu-item active">
             <a href="{{ path('app_users_admin') }}" class="menu-link">
@@ -88,11 +89,15 @@
 
         <!-- Forms -->
 
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Forms &amp; Tables</span></li>
+        
+
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="back">Forum</div>
                 <div data-i18n="Form Layouts">Gestion Evenement</div>
+                <div data-i18n="Form Elements">Gestion Produits</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
@@ -100,6 +105,8 @@
                         <div data-i18n="Basic Inputs">Publications</div>
                     <a href="{{path('app_evenement_index')}}" class="menu-link">
                         <div data-i18n="Vertical Form">Evenements</div>
+                    <a href="{{path('app_produits_index')}}" class="menu-link">
+                        <div data-i18n="Basic Inputs">Produit</div>
                     </a>
                 </li>
                 <li class="menu-item">
@@ -107,6 +114,8 @@
                         <div data-i18n="Input groups">commentaires </div>
                     <a href="{{path('app_don_index')}}" class="menu-link">
                         <div data-i18n="Horizontal Form">Dons</div>
+                    <a href="{{path('app_categories_index')}}" class="menu-link">
+                        <div data-i18n="Input groups">Categorie</div>
                     </a>
                 </li>
             </ul>
@@ -119,6 +128,7 @@
                 </li>
             </ul>
         </li>
+       
         <!-- Tables -->
 
         <!-- Misc -->
@@ -146,5 +156,12 @@
 
 
 
+        <li class="menu-item">
+            <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Tables">Tables</div>
+            </a>
+        </li>
+        
     </ul>
 </aside>
