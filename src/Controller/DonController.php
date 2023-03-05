@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/don')]
+#[Route('admin/don')]
 class DonController extends AbstractController
 {
     #[Route('/', name: 'app_don_index', methods: ['GET'])]

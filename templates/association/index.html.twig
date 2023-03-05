@@ -66,13 +66,13 @@
                                         <td> <a href={{ path('app_association_show',{'id':p.id })}}><button class="btn btn-dark">Show </button>  </a></td>
                                         <td> <a href={{ path('app_association_edit',{'id':p.id })}}><button class="btn btn-success">Modifier </button> <i class="fa fa-trash"></i> </a></td>
 
-                                        <td> <a href="/association/{{ p.id }}" onclick="return confirm('Etes vous sûr de supprimer {{ p.nom }}');"
+                                        <td> <a href={{ path('app_association_delete',{'id':p.id })}} onclick="return confirm('Etes vous sûr de supprimer {{ p.nom }}');"
                                             > <button class="btn btn-danger">Supp </button></a></td>
 
 
                                     </tr>
 
-
+                                        
                                 {% endfor %}
                                 </tbody>
                             </table>

@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-#[Route('/association')]
+#[Route('admin/association')]
 class AssociationController extends AbstractController
 {
     #[Route('/', name: 'app_association_index', methods: ['GET'])]

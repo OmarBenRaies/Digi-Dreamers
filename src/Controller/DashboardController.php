@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractController
 {
-    #[Route('/dashboard',name:'app_dashboard')]
+    #[Route('/admin/dashboard',name:'app_dashboard')]
     public function index(EvenementRepository $evenementRepository): Response
     {
         $results= $evenementRepository->chartRepository();

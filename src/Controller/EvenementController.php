@@ -17,11 +17,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\dto\Pie;
 use Knp\Component\Pager\PaginatorInterface;
 
-#[Route('/evenement')]
+
+
 class EvenementController extends AbstractController
 {
 
-    #[Route('/', name: 'app_evenement_index', methods: ['GET'])]
+    #[Route('/admin/evenement', name: 'app_evenement_index', methods: ['GET'])]
     public function index(Request $request,EvenementRepository $evenementRepository,PaginatorInterface $paginator): Response
     {       $evenements=$evenementRepository->findAll();
             $evenements = $paginator->paginate(
@@ -34,7 +35,7 @@ class EvenementController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_evenement_new', methods: ['GET', 'POST'])]
+    #[Route('/admin/evenement/new', name: 'app_evenement_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EvenementRepository $evenementRepository): Response
     {
         $evenement = new Evenement();
@@ -73,7 +74,7 @@ class EvenementController extends AbstractController
         ]);
     }
 
-    #[Route('show/{id}', name: 'app_evenement_show', methods: ['GET'])]
+    #[Route('/admin/evenement/show/{id}', name: 'app_evenement_show', methods: ['GET'])]
     public function show(Evenement $evenement): Response
     {
         return $this->render('evenement/show.html.twig', [
@@ -81,7 +82,7 @@ class EvenementController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_evenement_edit', methods: ['GET', 'POST'])]
+    #[Route('/admin/evenement/{id}/edit', name: 'app_evenement_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request,$id): Response
     {   $em=$this->getDoctrine()->getManager();
         $evenement=$em->getRepository(Evenement::class)->find($id);
@@ -120,7 +121,7 @@ class EvenementController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_evenement_delete')]
+    #[Route('/admin/evenement/{id}', name: 'app_evenement_delete')]
     public function delete(Request $request, $id) {
         $evenement= $this->getDoctrine()->getRepository(Evenement::class)->find($id);
 
@@ -155,7 +156,8 @@ class EvenementController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $event = $em->getRepository(Evenement::class)->find($id);
 
-
+        
+        
         $usr = $em->getRepository(User::class)->find(1);
         if ($event->getNbrParticipant() > 0) {
             $event->setNbrParticipant($event->getNbrParticipant() - 1) ;

@@ -78,12 +78,16 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type:"datetime",options: ["default" => "CURRENT_TIMESTAMP"])]
     private \DateTime $updatedAt;
+    #[ORM\ManyToMany(targetEntity: Evenement::class, mappedBy: 'users')]
+    private Collection $evenements;
+
 
 
     public function __construct()
     {
         $this->updatedAt = new \DateTime();
         $this->image = '';
+        $this->evenements = new ArrayCollection();
 
         $this->Likes = new ArrayCollection();
     }
@@ -292,6 +296,31 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
 
         return $this;
     }
+  /**
+     * @return Collection<int, Evenement>
+     */
+    public function getEvenements(): Collection
+    {
+        return $this->evenements;
+    }
 
+    public function addEvenement(Evenement $evenement): self
+    {
+        if (!$this->evenements->contains($evenement)) {
+            $this->evenements->add($evenement);
+            $evenement->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvenement(Evenement $evenement): self
+    {
+        if ($this->evenements->removeElement($evenement)) {
+            $evenement->removeUser($this);
+        }
+
+        return $this;
+    }
 
 }

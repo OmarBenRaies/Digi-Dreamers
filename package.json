@@ -1,8 +1,12 @@
 {
   "dependencies": {
-    "chart.js": "^4.2.1",
+    "chart.js": "^3.4.1",
     "dropify": "^0.2.2",
     "echarts": "^5.4.1",
     "leaflet": "^1.9.3"
+  },
+  "devDependencies": {
+    "@hotwired/stimulus": "^3.0.0",
+    "@symfony/ux-chartjs": "file:vendor/symfony/ux-chartjs/assets"
   }
 }
