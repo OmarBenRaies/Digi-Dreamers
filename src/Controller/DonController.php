@@ -7,6 +7,7 @@ use App\Entity\Evenement;
 use App\Form\DonType;
 use App\Repository\DonRepository;
 use App\Repository\EvenementRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,10 +18,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class DonController extends AbstractController
 {
     #[Route('/', name: 'app_don_index', methods: ['GET'])]
-    public function index(DonRepository $donRepository): Response
-    {
+    public function index(DonRepository $donRepository,PaginatorInterface $paginator,Request $request): Response
+    {   $dons=$donRepository->findAll();
+        $dons = $paginator->paginate(
+            $dons,
+            $request->query->getInt('page', 1),
+            2
+        );
         return $this->render('don/index.html.twig', [
-            'dons' => $donRepository->findAll(),
+            'dons' => $dons,
         ]);
     }
 

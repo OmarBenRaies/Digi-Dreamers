@@ -34,7 +34,7 @@
                                     <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
                                 </div>
                             </div>
-                            <h4 class="m-t-0 header-title">List Dons</h4>
+                            <h4 class="m-t-0 header-title">List Dons : {{ dons.getTotalItemCount }}</h4>
                             <p class="text-muted font-14 m-b-20">
                             <table>
                                 <tr>
@@ -67,11 +67,11 @@
 
 
 
-                                        <td><button class="btn btn-dark"><a href="{{ path('app_don_show',{'id':p.id })}}">Show </a></button></td>
-                                        <td><button class="btn btn-success"><a href="{{ path('app_don_edit',{'id':p.id })}}">Modifier </a></button></td>
+                                        <td><a href="{{ path('app_don_show',{'id':p.id })}}"><button class="btn btn-dark">Show</button> </a></td>
+                                        <td><a href="{{ path('app_don_edit',{'id':p.id })}}"><button class="btn btn-success">Modifier</button> </a></td>
 
-                                        <td> <button class="btn btn-danger"><a href="{{ path('app_don_delete', {'id': p.id}) }}" onclick="return confirm('Etes vous sûr de supprimer {{ p.somme }}');"
-                                                > Supp </a></button></td>
+                                        <td> <a href="{{ path('app_don_delete', {'id': p.id}) }}" onclick="return confirm('Etes vous sûr de supprimer le don de somme: {{ p.somme }} de l evenement {{ p.evenement.titre }} vers l association {{ p.association.nom }} ');"
+                                                ><button class="btn btn-danger"> Supp </button> </a> </td>
 
 
                                     </tr>
@@ -80,6 +80,7 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
+{{ knp_pagination_render(dons) }}
                         </div>
                     </div>
                 </div>

@@ -6,6 +6,7 @@ use App\Entity\Association;
 use App\Form\AssociationType;
 use App\Repository\AssociationRepository;
 use Dompdf\Dompdf;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,10 +17,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class AssociationController extends AbstractController
 {
     #[Route('/', name: 'app_association_index', methods: ['GET'])]
-    public function index(AssociationRepository $associationRepository): Response
-    {
+    public function index(Request $request,AssociationRepository $associationRepository,PaginatorInterface $paginator): Response
+    {   $associations=$associationRepository->findAll();
+        $associations = $paginator->paginate(
+            $associations,
+            $request->query->getInt('page', 1),
+            2
+        );
         return $this->render('association/index.html.twig', [
-            'associations' => $associationRepository->findAll(),
+            'associations' => $associations,
         ]);
     }
 

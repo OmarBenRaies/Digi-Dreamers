@@ -7,26 +7,30 @@ use App\Entity\User;
 use App\Form\EvenementType;
 use App\Repository\EvenementRepository;
 use App\Repository\UserRepository;
-use Dompdf\Dompdf;
-use Dompdf\Options;
-use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
+use Doctrine\ORM\EntityManagerInterface;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\HttpFoundation\JsonResponse;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\dto\Pie;
+use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('/evenement')]
 class EvenementController extends AbstractController
 {
 
     #[Route('/', name: 'app_evenement_index', methods: ['GET'])]
-    public function index(EvenementRepository $evenementRepository): Response
-    {
+    public function index(Request $request,EvenementRepository $evenementRepository,PaginatorInterface $paginator): Response
+    {       $evenements=$evenementRepository->findAll();
+            $evenements = $paginator->paginate(
+            $evenements,
+            $request->query->getInt('page', 1),
+            2
+        );
         return $this->render('evenement/index.html.twig', [
-            'evenements' => $evenementRepository->findAll(),
+            'evenements' => $evenements,
         ]);
     }
 
@@ -165,6 +169,29 @@ class EvenementController extends AbstractController
     }
 
 
+    #[Route('/event/search', name: 'Evenement_search' )]
+    public function searchAction(Request $request,EntityManagerInterface $em)
+    {
+
+        $requestString = $request->get('q');
+        $evenements =  $em->getRepository(Evenement::class)->findEntitiesByString($requestString);
+
+        if(!count($evenements)) {
+            $result['evenements']['error'] = "Aucun événement trouvé  ";
+        } else {
+            $result['evenements'] = $this->getRealEntities($evenements);
+
+        }
+
+        return new Response(json_encode($result));
+    }
+    public function getRealEntities($evenements){
+        foreach ($evenements as $evenement){
+            $realEntities[$evenement->getId()] = [$evenement->getTitre(),$evenement->getDate()];
+
+        }
+        return $realEntities;
+    }
 
 
 

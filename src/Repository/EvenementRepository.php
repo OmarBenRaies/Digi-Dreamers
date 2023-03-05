@@ -102,7 +102,16 @@ class EvenementRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-
+    public function findEntitiesByString($str){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT r
+                FROM App\Entity\Evenement r
+                WHERE r.gouv LIKE :str '
+            )
+            ->setParameter('str', '%'.$str.'%')
+            ->getResult();
+    }
 
 
 

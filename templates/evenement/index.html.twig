@@ -33,7 +33,7 @@
                                     <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
                                 </div>
                             </div>
-                            <h4 class="m-t-0 header-title">List Evenement</h4>
+                            <h4 class="m-t-0 header-title">List Evenement : {{ evenements.getTotalItemCount }}</h4>
                             <p class="text-muted font-14 m-b-20">
                             <table>
                                 <tr>
@@ -82,6 +82,8 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
+                            {{ knp_pagination_render(evenements) }}
+
                         </div>
                     </div>
                 </div>
