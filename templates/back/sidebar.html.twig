@@ -85,27 +85,42 @@
         </li>
 
         <!-- Forms & Tables -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Forms &amp; Tables</span></li>
+
         <!-- Forms -->
+
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="back">Forum</div>
+                <div data-i18n="Form Layouts">Gestion Evenement</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
                     <a href="back" class="menu-link">
                         <div data-i18n="Basic Inputs">Publications</div>
+                    <a href="{{path('app_evenement_index')}}" class="menu-link">
+                        <div data-i18n="Vertical Form">Evenements</div>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="listcom" class="menu-link">
                         <div data-i18n="Input groups">commentaires </div>
+                    <a href="{{path('app_don_index')}}" class="menu-link">
+                        <div data-i18n="Horizontal Form">Dons</div>
                     </a>
                 </li>
             </ul>
         </li>
         
+                <li class="menu-item">
+                    <a href="{{path('app_association_index')}}" class="menu-link">
+                        <div data-i18n="Horizontal Form">Associations</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- Tables -->
+
         <!-- Misc -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text"></span></li>
         <li class="menu-item">
@@ -128,5 +143,8 @@
                 <div data-i18n="Documentation"></div>
             </a>
         </li>
+
+
+
     </ul>
 </aside>

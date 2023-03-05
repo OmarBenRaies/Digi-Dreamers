@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\EvenementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Publication;
 use App\Form\PublicationType;
@@ -20,8 +21,8 @@ class HomeController extends AbstractController
         $repository= $doctrine->getRepository(Publication::class);
     $publications=$repository->findAll();
         return $this->render('home/index.html.twig', [
+        'evenements' => $evenementRepository->selectEvents(),
             'publication' => $publications,
         ]);
     }
 }
-   

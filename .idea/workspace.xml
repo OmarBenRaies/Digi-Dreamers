@@ -4,21 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab0ef236-6ca6-4d9f-9e87-735b983cc1cb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/LotusCare.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/LotusCare.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+    <list default="true" id="ab0ef236-6ca6-4d9f-9e87-735b983cc1cb" name="Changes" comment="add pie chart and controller json">
+      <change afterPath="$PROJECT_DIR$/public/assets/js/evenement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Digi-Dreamers.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Digi-Dreamers.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AssociationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AssociationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DonController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DonController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/EvenementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EvenementController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/EvenementRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/EvenementRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/association/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/association/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/don/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/don/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/evenement/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/evenement/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/evenement/index2.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/evenement/index2.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/evenement/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/evenement/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,9 +29,23 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution />
+    <execution>
+      <executable path="composer" />
+    </execution>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -122,8 +138,6 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/persistence" />
       <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-migrations-bundle" />
       <path value="$PROJECT_DIR$/vendor/psr/link" />
-      <path value="$PROJECT_DIR$/vendor/friendsofphp/proxy-manager-lts" />
-      <path value="$PROJECT_DIR$/vendor/laminas/laminas-code" />
       <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
       <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
       <path value="$PROJECT_DIR$/vendor/phpunit/php-invoker" />
@@ -170,6 +184,15 @@
       <path value="$PROJECT_DIR$/vendor/symfony/monolog-bridge" />
       <path value="$PROJECT_DIR$/vendor/symfony/stopwatch" />
       <path value="$PROJECT_DIR$/vendor/sensio/framework-extra-bundle" />
+      <path value="$PROJECT_DIR$/vendor/masterminds/html5" />
+      <path value="$PROJECT_DIR$/vendor/phenx/php-svg-lib" />
+      <path value="$PROJECT_DIR$/vendor/phenx/php-font-lib" />
+      <path value="$PROJECT_DIR$/vendor/sabberworm/php-css-parser" />
+      <path value="$PROJECT_DIR$/vendor/dompdf/dompdf" />
+      <path value="$PROJECT_DIR$/vendor/knplabs/knp-snappy-bundle" />
+      <path value="$PROJECT_DIR$/vendor/knplabs/knp-snappy" />
+      <path value="$PROJECT_DIR$/vendor/knplabs/knp-components" />
+      <path value="$PROJECT_DIR$/vendor/knplabs/knp-paginator-bundle" />
     </include_path>
   </component>
   <component name="ProjectId" id="2LChC3PIPF0UN3MZ379kKyZiUCQ" />
@@ -182,7 +205,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/wamp64/www/lotuscare-v2&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/info tech sud/PhpstormProjects/Pidev/Digi-Dreamers&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -194,6 +217,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\info tech sud\PhpstormProjects\Pidev\Digi-Dreamers\public" />
       <recent name="C:\wamp64\www\LotusCare\templates\front" />
     </key>
   </component>
@@ -217,10 +241,85 @@
       <workItem from="1676024701594" duration="653000" />
       <workItem from="1676025472099" duration="192000" />
       <workItem from="1676026631007" duration="3010000" />
+      <workItem from="1676162818183" duration="3465000" />
+      <workItem from="1676167363371" duration="9954000" />
+      <workItem from="1676232115725" duration="81000" />
+      <workItem from="1676232198589" duration="142914000" />
+      <workItem from="1677099094631" duration="861000" />
+      <workItem from="1677193664933" duration="943000" />
+      <workItem from="1677253552049" duration="2030000" />
+      <workItem from="1677428340551" duration="2164000" />
+      <workItem from="1677525609930" duration="41462000" />
+      <workItem from="1677762517470" duration="6977000" />
+      <workItem from="1677784384247" duration="415000" />
+      <workItem from="1677802720634" duration="34967000" />
     </task>
+    <task id="LOCAL-00001" summary="controle de saisie">
+      <created>1676376886232</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1676376886232</updated>
+    </task>
+    <task id="LOCAL-00002" summary="update">
+      <created>1676429736823</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1676429736823</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Update Don">
+      <created>1676867626102</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1676867626102</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Update Don,Association,Evenement">
+      <created>1676985029200</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1676985029200</updated>
+    </task>
+    <task id="LOCAL-00005" summary="integrate map and get latitude and longitude Evenement">
+      <created>1677557151047</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1677557151047</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add pie chart and controller json">
+      <created>1677946208009</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1677946208009</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="controle de saisie" />
+    <MESSAGE value="update" />
+    <MESSAGE value="Update Don" />
+    <MESSAGE value="Update Don,Association,Evenement" />
+    <MESSAGE value="integrate map and get latitude and longitude Evenement" />
+    <MESSAGE value="add pie chart and controller json" />
+    <option name="LAST_COMMIT_MESSAGE" value="add pie chart and controller json" />
   </component>
 </project>

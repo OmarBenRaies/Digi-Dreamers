@@ -1,0 +1,75 @@
+{% extends "front/base.html.twig" %}
+
+
+
+
+{% block body %}
+    <h1>Evenement</h1>
+
+    <section class="home-blog">
+        <div class="container">
+            <a href="{{ path('app_home') }}">  <button class="btn btn-primary"> Back to home </button></a>
+
+            <div class="row ">
+                <div class="col">
+
+                    <div class="section-tittle text-center mb-40">
+                        <h2>{{ p.titre}}</h2>
+                        <div class="blogs-cap">
+                            <div class="blog-img">
+                                <img src="{{ asset('uploads/event_image/')~p.getUrlImage() }}" height="200" width="200" alt="">
+                            </div>
+                            <span>{{ p.prix~"  TND" }}</span>
+                            <h5>{{ p.lieu }}</h5>
+                            <p> {{ p.getNbrParticipant() ~ " Places disponibles" }}</p>
+                            <p>{{ p.date | date('d-m-y') }}</p>
+
+                            <p class="desc"> {{ p.description}} </p>
+
+                        </div>
+
+
+
+
+                        <a href="{{ path('app_evenement_index2') }}">  <button class="btn btn-primary"> Back to list </button></a>
+                        <a href="{{ path('app_evenement_participer',{'id':p.id}) }}"  onclick="return confirm('Etes vous sûr de Participer {{ p.titre() }}')"  > <button class="btn btn-primary"> Je participe </button></a>
+
+
+                    </div>
+                </div>
+                <div class="col">    <div id="mapid" style="height: 400px; width: 700px"> </div></div>
+
+            </div>
+      </div>
+
+    </section>
+
+
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+            integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+            crossorigin=""></script>
+    <script>
+
+        //initialize la carte
+        var mymap = L.map('mapid').setView([{{ p.lat|json_encode|raw }}, {{ p.lon|json_encode|raw }}], 13);
+        //on charge les tuile
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+        }).addTo(mymap);
+
+
+            L.marker([{{ p.lat|json_encode|raw }}, {{ p.lon|json_encode|raw }}]).addTo(mymap)
+                .bindPopup("<b>Evenement !</b><br />"+{{ p.titre|json_encode|raw }}).openPopup();
+
+
+    </script>
+{% endblock %}
+
+
+

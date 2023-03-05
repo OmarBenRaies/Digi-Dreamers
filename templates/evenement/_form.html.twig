@@ -1,0 +1,239 @@
+
+
+{% extends "back/base.html.twig" %}
+
+
+{%block body%}
+
+
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+        <div class="container-fluid">
+            {{ form_start(f, {'attr': {novalidate: 'novalidate'}}) }}
+
+
+
+
+<div class="row">
+    <div class="form-group">
+        <label for="lieu">Lieu Evenement</label>
+        <input type="hidden" class="lat" id="latitude" name="latitude" value="{{ f.vars.value.lat }}">
+        <input type="hidden" id="longitude" class="lng" name="longitude" value="{{ f.vars.value.lon }}">
+
+
+    </div>
+    <div id="marker-message" style="display: none;">Please choose a place on the map with a marker.</div>
+    <div id="mapid" class="map" style="height: 400px;"></div>
+</div>
+
+            <div class="row">
+                <div class="col-md-12"  style="display: flex; justify-content: center;align-items:center;width: 100%" >
+                    <div class="card-box">
+                        <div class="dropdown pull-right">
+
+                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                                <i class="mdi mdi-dots-vertical"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">Another action</a>
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">Something else</a>
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <label for="nom">Titre</label>
+
+                            {{ form_widget(f.titre, {'attr': {'class': 'form-control '}}) }}
+                            {{ form_errors(f.titre, {'attr': {'class': 'text-danger'}}) }}
+
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="nom">Description</label>
+
+
+                            {{ form_widget(f.description, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(f.description, {'attr': {'class': 'text-danger'}}) }}
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="nom">Lieu</label>
+
+
+                            {{ form_widget(f.lieu, {'attr': {'class': 'form-control lieu' ,'readonly': true}}) }}
+                            {{ form_errors(f.lieu, {'attr': {'class': 'text-danger'}}) }}
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="nom">Nbr participant</label>
+
+
+                            {{ form_widget(f.nbr_participant, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(f.nbr_participant, {'attr': {'class': 'text-danger'}}) }}
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="nom">Prix</label>
+
+
+                            {{ form_widget(f.prix, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(f.prix, {'attr': {'class': 'text-danger'}}) }}
+
+                        </div>
+
+
+
+
+
+
+
+
+
+                        <div class="form-group">
+
+                            <div class="col-sm-12">
+                                <div class="card-box">
+
+                                    <div class="dropdown pull-right">
+                                        <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </a>
+                                    </div>
+
+                                    <h4 class="header-title m-t-0 m-b-30">Image</h4>
+                                    {{ form_widget(f.url_image, {'attr': {'class': 'dropify','data-height':'200'}}) }}
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group">
+
+                            <label for="nom">Date</label>
+
+
+                            {{ form_widget(f.date, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(f.date, {'attr': {'class': 'text-danger'}}) }}
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="form-group">
+                            <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+                        </div>
+
+
+                        {{form_end(f)}}
+
+                    </div>
+                </div>
+            </div><a href="{{ path('app_evenement_index') }}">back to list</a>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    </div>
+
+
+    <script type="text/javascript">
+        $('.dropify').dropify({
+            messages: {
+                'default': 'Drag and drop a file here or click',
+                'replace': 'Drag and drop or click to replace',
+                'remove': 'Remove',
+                'error': 'Ooops, something wrong appended.'
+            },
+            error: {
+                'fileSize': 'The file size is too big (1M max).'
+            }
+        });
+    </script>
+    {%endblock%}
+
+    {% block javascripts %}
+        <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script>
+            let map = L.map('mapid').setView([	36.862499, 10.195556], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+            }).addTo(map);
+
+            const marker = L.marker([0, 0]).addTo(map);
+
+            var markerMessage = document.getElementById("marker-message");
+            try {
+                window.onload = function() {
+                    map.on('click', function(e) {
+
+                        markerMessage.style.display = "none";
+                        let pos=e.latlng;
+                        console.log(pos);
+                        marker.setLatLng(e.latlng);
+
+                        let url = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + pos.lat + '&lon=' + pos.lng;
+                        fetch(url)
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data);
+                                let full_adress=data.address.county+", "+data.address.state+", "+data.address.country;
+                                document.querySelector(".lieu").value=full_adress;
+                                document.querySelector(".lat").value=pos.lat;
+                                console.log("lllllllllllll"+pos.lat);
+                                document.querySelector(".lng").value=pos.lng;
+                                console.log(full_adress);
+                            });
+                    });
+                    if(marker.getLatLng()==null||marker.getLatLng().lat===0){
+
+                        markerMessage.style.display = "block";
+                    }
+
+                };
+
+
+
+
+
+
+
+            } catch (error) {
+                console.error(error);
+            }
+        </script>
+
+    {% endblock %}

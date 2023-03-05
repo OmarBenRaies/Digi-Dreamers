@@ -1,0 +1,39 @@
+{% extends "back/base.html.twig" %}
+
+{% block body %}
+    <h1>Evenement</h1>
+
+    <section class="home-blog">
+        <div class="container">
+            <a href="{{ path('app_evenement_index') }}"> <button class="btn btn-primary"> Back to list </button></a>
+            <div class="row justify-content-center">
+                <div class="cl-xl-7 col-lg-8 col-md-10">
+
+                    <div class="section-tittle text-center mb-40">
+                        <h2>{{ p.titre}}</h2>
+                        <div class="blogs-cap">
+                            <div class="blog-img">
+                                <img src="{{ asset('uploads/event_image/')~p.getUrlImage() }}" height="200" width="200" alt="">
+                            </div>
+                            <span>{{ p.prix~"  TND" }}</span>
+                            <h5>{{ p.lieu }}</h5>
+                            <p>{{ p.date | date('d-m-y') }}</p>
+                            <p> {{ p.description}} </p>
+                        </div>
+
+                        <a href={{ path('app_evenement_edit',{'id':p.id })}}> <button class="btn btn-success">Modifier </button></a>
+                        <a href="{{ path('app_evenement_delete',{'id':p.id}) }}"  onclick="return confirm('Etes vous sûr de Supprimer {{ p.titre() }}')"  > <button class="btn btn-danger"> Supprimer </button></a>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+{% endblock %}
+
