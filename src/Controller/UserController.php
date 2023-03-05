@@ -42,7 +42,7 @@ public function Add(Request $request,ManagerRegistry $doctrine,ValidatorInterfac
     if ($Form->isSubmitted()&&$Form->isValid())/*verifier */
     {
         $em=$doctrine->getManager();
-
+    
         $userWithSameEmail = $userRepository->findOneBy(['email' => $user->getEmail()]);
         $userWithSameCin = $userRepository->findOneBy(['cin' => $user->getCin()]);
 
