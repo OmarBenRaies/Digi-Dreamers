@@ -1,0 +1,119 @@
+
+{% extends "front/base.html.twig" %}
+
+{% block body %}
+<main>
+
+<div class="hero-area section-bg2">
+<div class="container">
+<div class="row">
+<div class="col-xl-12">
+<div class="slider-area">
+<div class="slider-height2 slider-bg4 d-flex align-items-center justify-content-center">
+<div class="hero-caption hero-caption2">
+<h2>Forum</h2>
+<nav aria-label="breadcrumb">
+
+</nav>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<section class="blog_area single-post-area section-padding">
+<div class="container">
+<div class="row">
+<div class="col-lg-8 posts-list">
+<div class="single-post">
+<div class="feature-img">
+<img class="img-fluid" src="assets/img/blog/single_blog_1.jpg" alt="">
+</div>
+<div class="blog_details">
+<h2 style="color: #2d2d2d;">{{Publication.CodePub}}
+</h2>
+<ul class="blog-info-link mt-3 mb-4">
+</ul>
+
+
+
+
+
+
+
+<div class="quote-wrapper">
+<div class="quotes">
+<h2 class="blog-head" style="color: #2d2d2d;"><img class="card-img rounded-0" style="width: 80%;" width='100px' src="{{ asset('uploadsforum/imagespublication/'~Publication.UrlImagePub) }}" alt=""></h2>
+
+</div>
+</div>
+<p class="excert">
+{{Publication.ContenuPub }}
+</p>
+
+</div>
+</div>
+
+
+
+      <table class="table">
+                                <thead class="thead-dark">
+                                <tr>
+                                    
+                                    <th>Commentaire </th>
+                            
+                                       <th>date</th>
+                                    
+                                       <th></th>
+                                       <th></th>
+
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                        {% for commentaire in commentaire %}
+            <tr>
+              
+                <td>{{ commentaire.contenucomm}}</td>
+                <td>{{ commentaire.datecom|date('d-m-y')}}</td>
+
+
+
+
+
+
+
+                <td><a href="{{ path ('editcom2',{'id':commentaire.id}) }}">edit</a></td>
+               <td><a href="{{ path ('deletecom2',{'id':commentaire.id}) }}">delete</a></td>            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+
+                                </tbody>
+                            </table>
+
+             
+
+
+   
+
+
+                       
+
+<a href="{{path('addcom2',{'id':Publication.id})}}"><button class='btn btn-secondary'>laisser un commentaire</button></a>
+
+
+
+
+
+
+
+{% endblock %}
+
+

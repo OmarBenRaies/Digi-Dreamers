@@ -1,0 +1,69 @@
+{% extends "front/base.html.twig" %}
+{% block body %}
+<section class="blog_area">
+<h1>Publications: ({{ publication.getTotalItemCount}}) </h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="blog_left_sidebar">
+                  {% for publication in publication %}
+                    <article class="blog_item">
+                        <div class="blog_item_img">
+                            <img class="card-img rounded-0" style="width: 80%;" width='100px' src="{{ asset('uploadsforum/imagespublication/'~publication.UrlImagePub) }}" alt="">
+                            <a href="#" class="blog_item_date">
+                                <h3>{{publication.DatePub|date('d')}}</h3>
+                                <p>{{publication.DatePub|date('F')}}</p>
+                            </a>
+                        </div>
+                        <div class="blog_details">
+                            <a class="d-inline-block" href="{{path('getpubid',{'id':publication.id})}}">
+                                <h2 class="blog-head" style="color: #2d2d2d;">{{ publication.CodePub }}</h2>
+                            </a>
+                            <p>{{ publication.ContenuPub }}</p>
+                            <ul class="blog-info-link">
+                                <td><a href="{{ path ('editpubfront',{'id':publication.id}) }}">edit</a></td>
+               <td><a href="{{ path ('deletepub2',{'id':publication.id}) }}">delete</a></td>   
+                            </ul>
+                        </div>
+                    </article>      
+                  {% endfor %}
+                    <button class="btn btn-primary">{{ knp_pagination_render(publication) }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+ 
+
+
+
+
+<!-- <table class="table text-white" border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for publication in publication %}
+            <tr>
+                <td>{{ publication.id }}</td>
+                <td>{{ publication.ContenuPub }}</td>
+                <td>{{ publication.CodePub }}</td>
+
+                
+                <td><a href="{{ path ('editpub',{'id':publication.id}) }}">edit</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+</table>
+<br> 
+-->
+</main>
+{% endblock %}
+

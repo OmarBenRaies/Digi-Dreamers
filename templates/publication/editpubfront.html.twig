@@ -1,0 +1,63 @@
+{% extends "front/base.html.twig" %}
+{% block body %} 
+ {{ form_start(formP, {'attr': {'novalidate': 'novalidate'}}) }}
+
+
+                        <div class="form-group">
+
+                            <label for="nom">Titre</label>
+
+
+                            {{ form_widget(formP.code_pub, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(formP.code_pub , {'attr': {'class': 'text-danger'}}) }}
+
+                       </div>
+
+
+                
+
+                           <div class="form-group">
+
+                            <label for="nom">Contenu</label>
+
+
+                            {{ form_widget(formP.contenupub, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(formP.contenupub, {'attr': {'class': 'text-danger'}}) }}
+
+                       </div>
+
+                       <div class="form-group">
+
+                            <label for="nom">Image</label>
+
+
+                            {{ form_widget(formP.UrlImagePub, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(formP.UrlImagePub, {'attr': {'class': 'text-danger'}}) }}
+
+                       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <div class="form-group">
+                            <button class="btn btn-primary">{{ button_label|default('save') }}</button>
+
+                        </div>
+
+
+                        {{form_end(formP)}}
+                        {% endblock %}

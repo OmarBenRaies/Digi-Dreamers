@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -62,6 +64,14 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?int $verified = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: PubLike::class)]
+    private Collection $Likes;
+
+    public function __construct()
+    {
+        $this->Likes = new ArrayCollection();
+    }
 
     #[ORM\Column(nullable: true, options: ["default" => ""])]
     private ?string $image;
