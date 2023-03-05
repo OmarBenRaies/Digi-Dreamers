@@ -38,6 +38,22 @@ class ProduitsRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    function searchQB($produit)
+    {
+       return $this->createQueryBuilder('produit')
+       ->where('produit.Description LIKE ?1')
+       ->setParameter('1','%'.$produit.'%')->getQuery()->getResult();
+    }
+    public function chartRepository()
+    {
+        $qb = $this->createQueryBuilder('r');
+
+        $qb->select('c.Nom_cat, COUNT(r.id) as count')
+            ->join('r.Categorie','c')
+            ->groupBy('c.Nom_cat');
+
+        return $qb->getQuery()->getResult();
+    }
 
 //    /**
 //     * @return Produits[] Returns an array of Produits objects

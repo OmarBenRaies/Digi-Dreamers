@@ -138,13 +138,14 @@
                     </div>
                 </div>
 
-                <div class="search_input" id="search_input_box">
-                    <form class="search-inner d-flex justify-content-between ">
-                        <input type="text" class="form-control" id="search_input" placeholder="Search Here"/>
-                        <button type="submit" class="btn"></button>
+                 <div class="search_input" id="search_input_box">
+                    <form id="search-form" class="search-inner d-flex justify-content-between " novalidate="novalidate" method="post" action="#">
+                        <input type="text" class="form-control" id="search_input_field" placeholder="Search Here"/>
+                        <button type="submit" class="btn" type="submit" ></button>
                         <span class="ti-close" id="close_search" title="Close Search"></span>
                     </form>
                 </div>
+ <!-- /Search -->
 
                 <div class="col-12">
                     <div class="mobile_menu d-block d-lg-none"></div>
@@ -192,5 +193,28 @@
         {% block javascripts %}
 
         {% endblock %}
+
+        <script>
+		$(document).ready(function () {
+$('#search-form').submit(function (event) {
+        event.preventDefault();
+
+var formData = $("#search_input_field").val();
+
+$.ajax({
+url: '{{ path('app_produit_search') }}',
+type: 'POST',
+data: {'search':formData},
+dataType: 'json',
+success: function (data) { // Afficher les résultats de la recherche
+var results = $('#search-results');
+results.empty();
+results.append(data.html);
+}
+});
+
+});
+});
+	</script>
     </body>
 </html>

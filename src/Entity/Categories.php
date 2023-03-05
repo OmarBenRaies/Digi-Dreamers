@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+
 use Symfony\Component\Validator\Constraints\Type;
 
 #[ORM\Entity(repositoryClass: CategoriesRepository::class)]
@@ -18,9 +19,11 @@ class Categories
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:4,minMessage:"Veuillez entrer un code de minimum 6 caractères")]
     private ?string $Code_cat = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:4,minMessage:"Veuillez entrer un nom de minimum 4 caractères")]
     private ?string $Nom_cat = null;
 
     #[ORM\OneToMany(mappedBy: 'Categorie', targetEntity: Produits::class)]

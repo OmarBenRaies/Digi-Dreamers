@@ -1,5 +1,53 @@
 {% extends 'back/base.html.twig' %}
 
 {% block body %}
+<div id="myChart" class="align-content-center" style="width: 300px; height: 500px;"></div>
+                            {% set data = [] %}
+                            {% for result in results %}
+                                {% set data = data|merge([{value: result.valeur, name: result.value}]) %}
+                            {% endfor %}
+                       
  
 {% endblock %}
+ {% block jsChart %}
+                            {#<script src="node_modules/echarts/dist/echarts.min.js"></script> #}
+                            {#  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>#}
+                            <script>
+                                var Chart = echarts.init(document.getElementById('myChart'));
+                                Chart.setOption({
+                                    title: {
+                                        text: 'Produits '
+                                    },
+                                    toolbox: {
+                                        show: true,
+                                        feature: {
+                                            mark: { show: true },
+                                            dataView: { show: true, readOnly: true },
+
+                                            saveAsImage: { show: true }
+                                        }
+                                    },
+                                    tooltip: {
+                                        trigger: 'item'
+                                    },
+                                    series: [{
+                                        name: 'Catégorie',
+                                        type: 'pie',
+
+                                        data: [  {% for result in results %}
+
+                                            {value: {{ result.valeur }}, name: '{{ result.value }}'},
+                                            {% endfor %}
+                                        ], emphasis: {
+                                            itemStyle: {
+                                                shadowBlur: 10,
+                                                shadowOffsetX: 0,
+                                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                            }
+                                        }
+
+                                    }]
+                                });
+
+                            </script>
+                        {% endblock %}
