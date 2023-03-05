@@ -68,10 +68,7 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: PubLike::class)]
     private Collection $Likes;
 
-    public function __construct()
-    {
-        $this->Likes = new ArrayCollection();
-    }
+    
 
     #[ORM\Column(nullable: true, options: ["default" => ""])]
     private ?string $image;
@@ -87,6 +84,8 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     {
         $this->updatedAt = new \DateTime();
         $this->image = '';
+
+        $this->Likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -263,7 +262,36 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     {
         $this->updatedAt = $updatedAt;
     }
+  
+    /**
+     * @return Collection<int, PubLike>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->Likes;
+    }
 
+    public function addLike(PubLike $like): self
+    {
+        if (!$this->Likes->contains($like)) {
+            $this->Likes->add($like);
+            $like->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(PubLike $like): self
+    {
+        if ($this->Likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getUser() === $this) {
+                $like->setUser(null);
+            }
+        }
+
+        return $this;
+    }
 
 
 }
