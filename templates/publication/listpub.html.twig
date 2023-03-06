@@ -1,6 +1,13 @@
 {% extends "front/base.html.twig" %}
+
 {% block body %}
+
+
+
+
+<div>              
 <section class="blog_area">
+<h1>Publications: ({{ publication.getTotalItemCount}}) </h1>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mb-5 mb-lg-0">
@@ -17,51 +24,91 @@
                         <div class="blog_details">
                             <a class="d-inline-block" href="{{path('getpubid',{'id':publication.id})}}">
                                 <h2 class="blog-head" style="color: #2d2d2d;">{{ publication.CodePub }}</h2>
+                              
+
+                                
+                                 
+                                 
+
                             </a>
                             <p>{{ publication.ContenuPub }}</p>
+
+
+                            <a href="{{path ('likepub',{'id':publication.id})}}" class="btn js-likes"> </a>
+                              
+                            {% if app.user and  publication.isLikedByUser (app.user) %}
+                                <i class="ri-thumb-up-fill"></i>
+
+                            {% else %}
+
+                                <i class="ri-thumb-up-line"></i>
+
+                            {% endif %}
+                            <span class="js-likes">{{publication.likes|length }}</span>
+                              <span class="js-label">like</span>
+
+
                             <ul class="blog-info-link">
                                 <td><a href="{{ path ('editpubfront',{'id':publication.id}) }}">edit</a></td>
-               <td><a href="{{ path ('deletepub2',{'id':publication.id}) }}">delete</a></td>   
+                                <td><a href="{{ path ('deletepub2',{'id':publication.id}) }}">delete</a></td>   
                             </ul>
                         </div>
                     </article>      
                   {% endfor %}
+                    <button class="btn btn-primary">{{ knp_pagination_render(publication) }}</button>
                 </div>
             </div>
         </div>
     </div>
 </section> 
-
- 
-
-
-
-
-<!-- <table class="table text-white" border="1">
-        <thead>
-            <tr>
-                <th>Id</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for publication in publication %}
-            <tr>
-                <td>{{ publication.id }}</td>
-                <td>{{ publication.ContenuPub }}</td>
-                <td>{{ publication.CodePub }}</td>
-
-                
-                <td><a href="{{ path ('editpub',{'id':publication.id}) }}">edit</a></td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-</table>
-<br> 
--->
 </main>
+
+
 {% endblock %}
+
+
+{% block javascripts %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+function onClickBtnLike(event){
+
+    event.preventDefault();
+
+    const url = this.href;
+
+
+const spanCount = this.querySelector('span.js-like');
+if (spanCount !== null) {
+  spanCount.textContent = response.data.likes;
+}
+
+
+const icone = this.querySelector('i');
+
+
+
+
+axios.get(url).then(function(response) {
+  spanCount.textContent = response.data.like;
+
+  if (icone.classList.contains('fill')) { icone.classList.replace('fill' , 'line');
+ } else {icone.classList.replace('line' , 'fill');
+ }
+});
+}
+    
+document.querySelectorAll('a.js-likes').forEach(function(link) {
+  link.addEventListener('click', onClickBtnLike);
+})
+    
+
+
+
+ </script>
+
+
+
+
+{% endblock %}
+
 

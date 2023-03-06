@@ -95,6 +95,11 @@
             </tr>
         {% endfor %}
 
+
+        {% if qrcode %}
+        <img src="{{qrcode}}"> </img>
+        {% endif %}
+
                                 </tbody>
                             </table>
 
@@ -107,13 +112,8 @@
                        
 
 <a href="{{path('addcom2',{'id':Publication.id})}}"><button class='btn btn-secondary'>laisser un commentaire</button></a>
-
-
-
-
-
-
-
 {% endblock %}
+
+
 
 

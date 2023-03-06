@@ -2,22 +2,30 @@
 
 namespace App\Controller;
 
+use App\Entity\PubLike;
 use App\Entity\Commentaire;
+use App\Entity\Publication;
+use App\Entity\User;
+use App\Form\CommentaireType;
+use App\Form\PublicationType;
+use App\Repository\PubLikeRepository;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectManager;
+use App\Repository\PublicationRepository;
+use App\Services\QrcodeService;
+use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\PublicationRepository;
-use App\Entity\Publication;
-use App\Form\PublicationType;
-use App\Form\CommentaireType;
-
-use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\String\Slugger\SluggerInterface;
-
+use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\UX\Chartjs\Model\Chart;
 
 
 
@@ -63,6 +71,10 @@ public function list3(ManagerRegistry $doctrine): Response
         $publications=$repository->findAll();
         $publication=new Publication;
         $form=$this->createForm(PublicationType::class,$publication);
+        $publication->setAllDay(1); 
+        $publication->setBackgroundColor("#5c9665");
+        $publication->setTextColor("#000000");
+        $publication->setBorderColor("#F9ED69");
         $form->handleRequest($request);
        // if ($form->isSubmitted())
         {
@@ -109,10 +121,17 @@ public function list3(ManagerRegistry $doctrine): Response
     }
 
 #[Route('/listpub', name: 'listpub')]
-public function list(ManagerRegistry $doctrine): Response
+public function list(ManagerRegistry $doctrine,Request $request,PaginatorInterface $paginator,): Response
 {
     $repository= $doctrine->getRepository(Publication::class);
     $publications=$repository->findAll();
+    
+
+    $publications = $paginator->paginate(
+        $publications, /* query NOT result */
+        $request->query->getInt('page', 1), /*page number*/
+        3 /*limit per page*/
+    );
     return $this->render('publication/listpub.html.twig', [
         'publication' => $publications,
     ]);
@@ -149,6 +168,11 @@ public function list(ManagerRegistry $doctrine): Response
         $publications=$repository->findAll();
         $publication=new Publication;
         $form=$this->createForm(PublicationType::class,$publication);
+        $publication->setAllDay(1); 
+        $publication->setBackgroundColor("#5c9665");
+        $publication->setTextColor("#000000");
+        $publication->setBorderColor("#F9ED69");
+        
         $form->handleRequest($request);
        // if ($form->isSubmitted())
         {
@@ -227,16 +251,137 @@ public function list(ManagerRegistry $doctrine): Response
    }
 
    #[Route('/getpub/{id}', name: 'getpubid')]
-    public function show_id(ManagerRegistry $doctrine,ManagerRegistry $doc, $id): Response
+    public function show_id(ManagerRegistry $doctrine,ManagerRegistry $doc, $id,QrcodeService $qr): Response
     {
+
+        $qrcode=null;
         $repository = $doctrine->getRepository(Publication::class);
         $publications = $repository->find($id);
+        $qrcode=$qr->qrcode($publications->getContenuPub());
 
         $commentaire= $publications->getCommentaires();
         return $this->render('publication/detailspub.html.twig', [
             'Publication' => $publications,
             'commentaire'  => $commentaire,
+            'qrcode'=>$qrcode,
         ]);
     }
-}
 
+    #[Route('/calender', name: 'calenderpub')]
+
+    public function calendar( PublicationRepository $publication)
+     {
+
+        $events = $publication->findAll();
+
+        $rdvs = [];
+
+            foreach($events as $event){
+
+                $rdvs[] = [
+                    'id' => $event->getId(),
+                    'start' => $event->getDatePub()->format('Y-m-d H:i:s'),
+                    'title' => $event->getCodePub(),
+                    'description' => $event->getContenuPub(),
+                   'allDay' => $event->getAllDay(),
+                    'backgroundColor' =>$event->getBackgroundColor(),
+                'borderColor' => $event->getBorderColor(),
+                'textColor' => $event->getTextColor(),
+
+                ];
+
+            }
+        
+            $data = json_encode($rdvs);
+
+        return $this->render('publication/calenderpub.html.twig',compact('data'));
+     }
+
+
+     #[Route('/likepub/{id}', name: 'likepub')]
+     public function isLikedByUser(Publication $publication, ManagerRegistry $doctrine, PubLikeRepository $pubLikeRepository): Response
+     {
+         $user = $this->getUser();
+         if (!$user) {
+             return $this->json([
+                 'code' => 403,
+                 'message' => 'Unauthorized'
+             ], 403);
+         }
+     
+         if ($publication->isLikedByUser($user)) {
+             $likes = $pubLikeRepository->findOneBy([
+                 'publication' => $publication,
+                 'user' => $user
+             ]);
+     
+             $em = $doctrine->getManager();
+             $em->remove($likes);
+             $em->flush();
+     
+             return $this->json([
+                 'code' => 200,
+                 'message' => 'Like bien supprimé',
+                 'likes' => $pubLikeRepository->count(['publication' => $publication])
+             ]);
+         }
+     
+         $likes = new PubLike();
+         $likes->setPublication($publication)
+             ->setUser($user);
+     
+         $em = $doctrine->getManager();
+         $em->persist($likes);
+         $em->flush();
+     
+         return $this->json([
+             'code' => 200,
+             'message' => 'Like bien ajouté',
+             'likes' => $pubLikeRepository->count(['publication' => $publication])
+         ]);
+     }
+     
+     #[Route('/stats', name: 'stats')]
+     public function stats(ChartBuilderInterface $chartBuilder,PublicationRepository $publication, PubLikeRepository $pubLike): Response
+     {
+         $publication = $publication->findAll();
+ 
+        $labels = [];
+        $data = [];
+ 
+                 foreach ($publication as $publication) {
+ 
+ 
+                     $labels[] = $publication->getCodePub();
+                     $data[] = [1,2,3,1];
+                 
+                 }
+                 $chart = $chartBuilder->createChart(Chart::TYPE_LINE);           
+                 $chart->setData([
+                     'labels' => $labels ,
+                     'datasets' => [
+ 
+                         [
+                             'label' => 'like par pub',
+                             'backgroundColor' => 'rgb(255, 99, 132)',
+                             'borderColor' => 'rgb(255, 99, 132)',
+                             'data' => $data,
+                         ],
+                     ],
+                 ]);
+         
+                 $chart->setOptions([
+                     'scales' => [
+                         'y' => [
+                             'suggestedMin' => 0,
+                             'suggestedMax' => 100,
+                         ],
+                     ],
+                 ]);
+                 return $this->render('publication/stats.html.twig', [
+                    'chart' => $chart,
+         ]);
+     }
+
+
+}
