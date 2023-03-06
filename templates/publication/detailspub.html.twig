@@ -45,7 +45,8 @@
 
 <div class="quote-wrapper">
 <div class="quotes">
-<h2 class="blog-head" style="color: #2d2d2d;"><img class="card-img rounded-0" style="width: 80%;" width='100px' src="{{ asset('uploadsforum/imagespublication/'~Publication.UrlImagePub) }}" alt=""></h2>
+<img class="card-img rounded-0" style="width: 80%;" width='100px' src="{{ asset('uploadsforum/imagespublication/'~Publication.UrlImagePub) }}" alt="">
+{# <h2 class="blog-head" style="color: #2d2d2d;"><img class="card-img rounded-0" style="width: 80%;" width='100px' src="{{ asset('uploadsforum/imagespublication/'~Publication.UrlImagePub) }}" alt=""></h2> #}
 
 </div>
 </div>
@@ -95,6 +96,11 @@
             </tr>
         {% endfor %}
 
+
+        {% if qrcode %}
+        <img src="{{qrcode}}"> </img>
+        {% endif %}
+
                                 </tbody>
                             </table>
 
@@ -107,13 +113,8 @@
                        
 
 <a href="{{path('addcom2',{'id':Publication.id})}}"><button class='btn btn-secondary'>laisser un commentaire</button></a>
-
-
-
-
-
-
-
 {% endblock %}
+
+
 
 

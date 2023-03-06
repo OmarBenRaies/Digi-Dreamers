@@ -355,7 +355,7 @@
         }
 
         function increment() {
-          var value = el[0].value;
+          var value = el[0].value; 
           value++;
           if(!max || value <= max) {
             el[0].value = value++;

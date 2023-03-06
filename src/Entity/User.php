@@ -267,6 +267,34 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
         $this->updatedAt = $updatedAt;
     }
   
+    
+  /**
+     * @return Collection<int, Evenement>
+     */
+    public function getEvenements(): Collection
+    {
+        return $this->evenements;
+    }
+
+    public function addEvenement(Evenement $evenement): self
+    {
+        if (!$this->evenements->contains($evenement)) {
+            $this->evenements->add($evenement);
+            $evenement->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvenement(Evenement $evenement): self
+    {
+        if ($this->evenements->removeElement($evenement)) {
+            $evenement->removeUser($this);
+        }
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, PubLike>
      */
@@ -296,31 +324,6 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
 
         return $this;
     }
-  /**
-     * @return Collection<int, Evenement>
-     */
-    public function getEvenements(): Collection
-    {
-        return $this->evenements;
-    }
-
-    public function addEvenement(Evenement $evenement): self
-    {
-        if (!$this->evenements->contains($evenement)) {
-            $this->evenements->add($evenement);
-            $evenement->addUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEvenement(Evenement $evenement): self
-    {
-        if ($this->evenements->removeElement($evenement)) {
-            $evenement->removeUser($this);
-        }
-
-        return $this;
-    }
 
 }
+

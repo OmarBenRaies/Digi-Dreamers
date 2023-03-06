@@ -15,4 +15,6 @@ return [
     Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
     Symfony\UX\Chartjs\ChartjsBundle::class => ['all' => true],
+    Endroid\QrCodeBundle\EndroidQrCodeBundle::class => ['all' => true],
+    Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
 ];

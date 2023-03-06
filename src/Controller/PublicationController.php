@@ -15,6 +15,7 @@ use Doctrine\Persistence\ObjectManager;
 use App\Repository\PublicationRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
+use App\Services\QrcodeService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -250,15 +251,19 @@ public function list(ManagerRegistry $doctrine,Request $request,PaginatorInterfa
    }
 
    #[Route('/getpub/{id}', name: 'getpubid')]
-    public function show_id(ManagerRegistry $doctrine,ManagerRegistry $doc, $id): Response
+    public function show_id(ManagerRegistry $doctrine,ManagerRegistry $doc, $id,QrcodeService $qr): Response
     {
+
+        $qrcode=null;
         $repository = $doctrine->getRepository(Publication::class);
         $publications = $repository->find($id);
+        $qrcode=$qr->qrcode($publications->getContenuPub());
 
         $commentaire= $publications->getCommentaires();
         return $this->render('publication/detailspub.html.twig', [
             'Publication' => $publications,
             'commentaire'  => $commentaire,
+            'qrcode'=>$qrcode,
         ]);
     }
 
@@ -374,7 +379,7 @@ public function list(ManagerRegistry $doctrine,Request $request,PaginatorInterfa
                      ],
                  ]);
                  return $this->render('publication/stats.html.twig', [
-                    'stats' => $chart,
+                    'chart' => $chart,
          ]);
      }
 
