@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -16,25 +17,29 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[Vich\Uploadable]
-class User implements UserInterface,PasswordAuthenticatedUserInterface
+class User implements UserInterface,PasswordAuthenticatedUserInterface, \Serializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("users")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-
+    #[Groups("users")]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("users")]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\Email(message: "votre email n'est pas valide.")]
+    #[Groups("users")]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("users")]
     private ?string $password = null;
 
     #[Assert\EqualTo(
@@ -44,6 +49,7 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     private ?string $confirmPassword = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("users")]
     private ?string $telephone = null;
 
     #[ORM\Column(length: 255)]
@@ -53,17 +59,23 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
         minMessage: 'le cin doit etre composé de 8 carateres ',
         maxMessage: 'le cin doit etre composé de 8 carateres ',
     )]
+    #[Groups("users")]
     private ?string $cin = null;
 
 
 
     #[ORM\Column(type:"json")]
+    #[Groups("users")]
     private $roles = [];
 
     #[ORM\Column]
     private ?int $verified = null;
 
+    #[ORM\Column]
+    private ?string $verificationCode = null;
+
     #[ORM\Column(nullable: true, options: ["default" => ""])]
+    #[Groups("users")]
     private ?string $image;
 
     #[Vich\UploadableField(mapping:"user_images", fileNameProperty:"image")]
@@ -76,6 +88,13 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->updatedAt = new \DateTime();
+        $this->id = 0;
+        $this->nom = '';
+        $this->prenom = '';
+        $this->email = '';
+        $this->password = '';
+        $this->telephone = '';
+        $this->cin = '';
         $this->image = '';
     }
 
@@ -253,6 +272,58 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     {
         $this->updatedAt = $updatedAt;
     }
+
+
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->nom,
+            $this->prenom,
+            $this->email,
+            $this->password,
+            $this->telephone,
+            $this->cin,
+            $this->roles,
+            $this->image,
+            $this->updatedAt,
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->nom,
+            $this->prenom,
+            $this->email,
+            $this->password,
+            $this->telephone,
+            $this->cin,
+            $this->roles,
+            $this->image,
+            $this->updatedAt,
+            ) = unserialize($serialized);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getVerificationCode(): ?string
+    {
+        return $this->verificationCode;
+    }
+
+    /**
+     * @param string|null $verificationCode
+     */
+    public function setVerificationCode(?string $verificationCode): void
+    {
+        $this->verificationCode = $verificationCode;
+    }
+
+
 
 
 
