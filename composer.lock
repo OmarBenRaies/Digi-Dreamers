@@ -8826,6 +8826,10 @@
             "require": {
                 "php": ">=7.1.0"
             },
+            "conflict": {
+                "phpstan/phpstan": "<0.12.20",
+                "vimeo/psalm": "<4.6.1 || 4.6.2"
+            },
             "require-dev": {
                 "guzzlehttp/guzzle": "^6.3 || ^7.0",
                 "phpunit/phpunit": ">=7.0 < 10"
@@ -8834,6 +8838,11 @@
                 "guzzlehttp/guzzle": "An HTTP client to execute the API requests"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.10-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Twilio\\": "src/Twilio/"

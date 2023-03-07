@@ -24,11 +24,9 @@ class UserType extends AbstractType
 
             ->add('telephone')
             ->add('cin')
-            ->add('imageFile', VichImageType::class, array(
-                'required' => false,
-            ))
+            ->add('imageFile', VichImageType::class, array( 'required' => false))
+
             ->add('submit',SubmitType::class);
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

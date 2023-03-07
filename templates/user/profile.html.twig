@@ -1,0 +1,151 @@
+{% extends 'front/base.html.twig' %}
+
+
+
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('assets/css/luxa.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets/css/profile.css') }}">
+        {% endblock %}
+
+{% block body %}
+    <section style="margin: 50px 0px 30px 0px;">
+        <div class="lx-container-50">
+
+            <div style="padding: 30px;" class="lx-row align-stretch bs-md">
+                <div class="lx-column column-user-pic">
+                    <div class="profile-pic">
+                        <h1 class="pic-label">Profile picture</h1>
+                        <div class="pic bs-md">
+                            <img id="user_image" src="{{ asset('uploads/users/' ~ app.user.image) }}" alt="profile"
+                                 width="4024" height="6048" loading="lazy">
+                            <button onclick="document.getElementById('update_image_imageFile_file').click()" id="change-avatar" class="lx-btn"><i
+                                        class="fa fa-camera-retro"></i>&nbsp;&nbsp;Change your profile picture.</button>
+                        </div>
+
+
+                            {{ form_start(imageForm) }}
+                            <div style="display: none;" class="form-group">
+                                {{ form_widget(imageForm.imageFile) }}
+                            </div>
+
+                            <div id="update-image-container" style="margin-top: 10px;display: none;">
+                                <button type="submit" class="btn btn-outline-success">Update image</button>
+                            </div>
+                            {{ form_end(imageForm) }}
+
+
+                    </div>
+                </div>
+                <div class="lx-column">
+
+
+
+
+
+                    {{ form_start(updateForm) }}
+                        <div class="row">
+                            <div class="col">
+                                <div class="fieldset">
+                                    <label for="nom">Nom</label>
+                                    <div class="input-wrapper">
+                                        <span class="icon"><i class="fa fa-user"></i></span>
+                                        {{ form_widget(updateForm.nom) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="fieldset">
+                                    <label for="prenom">Prenom</label>
+                                    <div class="input-wrapper">
+                                        <span class="icon"><i class="fa fa-user"></i></span>
+                                        {{ form_widget(updateForm.prenom) }}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+                        <div class="fieldset">
+                            <label for="telephone">Telephone</label>
+                            <div class="input-wrapper">
+                                <span class="icon"><i class="fa fa-address-card"></i></span>
+                                {{ form_widget(updateForm.telephone) }}
+                            </div>
+                        </div>
+
+
+                        <div class="fieldset">
+                            <label for="email">E-mail</label>
+                            <div class="input-wrapper">
+                                <span class="icon"><i class="fa fa-envelope"></i></span>
+                                {{ form_widget(updateForm.email) }}
+                            </div>
+                            <div id="email-helper" class="helper"></div>
+                        </div>
+
+                        <div class="fieldset">
+                            <label for="pass">CIN</label>
+                            <div class="input-wrapper">
+                                <span class="icon"><i class="fa fa-key"></i></span>
+                                {{ form_widget(updateForm.cin) }}
+                            </div>
+                        </div>
+                        <div class="actions">
+
+                            {{ form_widget(updateForm.submit, { 'attr' : { 'class' : 'btn btn-primary' } }) }}
+
+                        </div>
+                    {{ form_end(updateForm) }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="{{ asset('assets/js/sweetalert2@11.js') }}"></script>
+    <script>
+
+
+        {% if sameCin is defined %}
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "Ce cin est déjà pris.",
+        })
+        {% endif %}
+    </script>
+
+    <script>
+
+        document.getElementById("update_image_imageFile_file").addEventListener("change", function preview_image(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('user_image');
+                output.src = reader.result;
+                document.getElementById('update-image-container').style.display = 'flex';
+                document.getElementById('update-image-container').style.justifyContent = 'center';
+
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        })
+
+        /*function preview_image(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('user_image');
+                output.src = reader.result;
+                document.getElementById('update-image-container').style.display = 'flex';
+                document.getElementById('update-image-container').style.justifyContent = 'center';
+
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }*/
+    </script>
+
+{% endblock %}

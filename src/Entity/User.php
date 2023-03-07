@@ -3,10 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -18,25 +17,29 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[Vich\Uploadable]
-class User implements UserInterface,PasswordAuthenticatedUserInterface
+class User implements UserInterface,PasswordAuthenticatedUserInterface, \Serializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("users")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-
+    #[Groups("users")]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("users")]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\Email(message: "votre email n'est pas valide.")]
+    #[Groups("users")]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("users")]
     private ?string $password = null;
 
     #[Assert\EqualTo(
@@ -46,6 +49,7 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     private ?string $confirmPassword = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("users")]
     private ?string $telephone = null;
 
     #[ORM\Column(length: 255)]
@@ -55,22 +59,23 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
         minMessage: 'le cin doit etre composé de 8 carateres ',
         maxMessage: 'le cin doit etre composé de 8 carateres ',
     )]
+    #[Groups("users")]
     private ?string $cin = null;
 
 
 
     #[ORM\Column(type:"json")]
+    #[Groups("users")]
     private $roles = [];
 
     #[ORM\Column]
     private ?int $verified = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: PubLike::class)]
-    private Collection $Likes;
-
-    
+    #[ORM\Column]
+    private ?string $verificationCode = null;
 
     #[ORM\Column(nullable: true, options: ["default" => ""])]
+    #[Groups("users")]
     private ?string $image;
 
     #[Vich\UploadableField(mapping:"user_images", fileNameProperty:"image")]
@@ -78,18 +83,19 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type:"datetime",options: ["default" => "CURRENT_TIMESTAMP"])]
     private \DateTime $updatedAt;
-    #[ORM\ManyToMany(targetEntity: Evenement::class, mappedBy: 'users')]
-    private Collection $evenements;
-
 
 
     public function __construct()
     {
         $this->updatedAt = new \DateTime();
+        $this->id = 0;
+        $this->nom = '';
+        $this->prenom = '';
+        $this->email = '';
+        $this->password = '';
+        $this->telephone = '';
+        $this->cin = '';
         $this->image = '';
-        $this->evenements = new ArrayCollection();
-
-        $this->Likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -266,64 +272,59 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     {
         $this->updatedAt = $updatedAt;
     }
-  
-    
-  /**
-     * @return Collection<int, Evenement>
-     */
-    public function getEvenements(): Collection
+
+
+
+    public function serialize()
     {
-        return $this->evenements;
+        return serialize(array(
+            $this->id,
+            $this->nom,
+            $this->prenom,
+            $this->email,
+            $this->password,
+            $this->telephone,
+            $this->cin,
+            $this->roles,
+            $this->image,
+            $this->updatedAt,
+        ));
     }
 
-    public function addEvenement(Evenement $evenement): self
+    public function unserialize($serialized)
     {
-        if (!$this->evenements->contains($evenement)) {
-            $this->evenements->add($evenement);
-            $evenement->addUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEvenement(Evenement $evenement): self
-    {
-        if ($this->evenements->removeElement($evenement)) {
-            $evenement->removeUser($this);
-        }
-
-        return $this;
+        list(
+            $this->id,
+            $this->nom,
+            $this->prenom,
+            $this->email,
+            $this->password,
+            $this->telephone,
+            $this->cin,
+            $this->roles,
+            $this->image,
+            $this->updatedAt,
+            ) = unserialize($serialized);
     }
 
     /**
-     * @return Collection<int, PubLike>
+     * @return string|null
      */
-    public function getLikes(): Collection
+    public function getVerificationCode(): ?string
     {
-        return $this->Likes;
+        return $this->verificationCode;
     }
 
-    public function addLike(PubLike $like): self
+    /**
+     * @param string|null $verificationCode
+     */
+    public function setVerificationCode(?string $verificationCode): void
     {
-        if (!$this->Likes->contains($like)) {
-            $this->Likes->add($like);
-            $like->setUser($this);
-        }
-
-        return $this;
+        $this->verificationCode = $verificationCode;
     }
 
-    public function removeLike(PubLike $like): self
-    {
-        if ($this->Likes->removeElement($like)) {
-            // set the owning side to null (unless already changed)
-            if ($like->getUser() === $this) {
-                $like->setUser(null);
-            }
-        }
 
-        return $this;
-    }
+
+
 
 }
-

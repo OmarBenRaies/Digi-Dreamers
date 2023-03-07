@@ -10,6 +10,10 @@
         .input-error{
             border: 1px solid #dc3545 !important;
         }
+
+        .vich-image{
+            width:100%;
+        }
     </style>
 {% endblock %}
 
@@ -32,6 +36,11 @@
                         <h5 class="mb-0">Modifier les informations de l'utilisateur</h5>
                         <small class="text-muted float-end">Merged input group</small>
                     </div>
+
+
+
+
+
                     <div class="card-body">
                         {{ form_start(userform, {'attr': {'novalidate': 'novalidate'}}) }}
                             <div class="mb-3">
@@ -83,20 +92,19 @@
 
                             </div>
 
-                        <div class="mb-3">
-                            <label class="form-label" for="basic-icon-default-message">Role</label>
-                            <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-role" class="input-group-text"><i class="bx bx-comment"></i></span>
-                               {{ form_widget(userform.role, { 'attr' : { 'class' : 'form-select' } }) }}   
-                            </div>
-                            <p style="display: none" id="error-role" class="invalid-feedback"></p>
-                        </div>
+
+
+
+
+
 
 
                         {{ form_widget(userform.submit, { 'attr' : { 'class' : 'btn btn-primary' } }) }}
 
                         {{ form_end(userform) }}
                     </div>
+
+
                 </div>
             </div>
         </div>
