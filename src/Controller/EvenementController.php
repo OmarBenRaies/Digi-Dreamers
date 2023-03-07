@@ -103,13 +103,14 @@ class EvenementController extends AbstractController
             $evenement->setLat($latitude);
             $evenement->setLon($longitude);
 
+            /*
             $participants=$evenement->getUsers();
             foreach ($participants as $participant) {
                 $to = $participant->getTelephone();
-                $body = "Hey Mr/Mdme ".$participant->getNom()."L'événement " . $evenement->getTitre() . " a été mis à jour. Veuillez consulter la nouvelle version.";
+                $body = "Hey Mr/Mdme ".$participant->getNom()." l'événement " . $evenement->getTitre() . " a été mis à jour. Veuillez consulter la nouvelle version.";
 
                 $twilioService->sendSms($to, $body);
-            }
+            }*/
             // uploads image
             $uploadFile=$form['url_image']->getData();
             $filename=md5(uniqid()).'.'.$uploadFile->guessExtension();//cryptage d image

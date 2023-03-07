@@ -19,7 +19,7 @@ class Evenement
     #[ORM\Column]
     private ?int $id = null;
 
-    //#[Assert\GreaterThanOrEqual("today",message: "Le date n'est pas valide")]
+    #[Assert\GreaterThanOrEqual("today",message: "Le date n'est pas valide")]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Groups("events")]
 

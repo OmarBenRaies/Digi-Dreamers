@@ -14,9 +14,9 @@ class TwilioService
 
     public function __construct()
     {
-        $this->accountSid = "AC0996b9b10a6b8a760e24c1b08cd52f99";
-        $this->authToken = "b2c25c5ca20d51a574a16f5b11139e3c";
-        $this->twilioNumber = "+15674092640";
+        $this->accountSid = "AC0f26a87bc35e437038bda8d0bc069986";
+        $this->authToken = "8f42361b064c195101e24714ef5ebdd2";
+        $this->twilioNumber = "+15746525693";
         $this->client = new Client($this->accountSid, $this->authToken);
     }
 
