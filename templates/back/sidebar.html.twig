@@ -55,7 +55,7 @@
                   </g>
                 </svg>
               </span>
-            <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+            <span class="app-brand-text demo menu-text fw-bolder ms-2">LotusCare</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -67,79 +67,114 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        <li class="menu-item active">
-            <a href="#" class="menu-link">
+        <li {% if app.request.attributes.get('_route') == 'app_dashboard' %} class="menu-item active" {% else %} class="menu-item" {% endif %} class="menu-item active">
+            <a href="{{ path('app_dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
 
         <!-- Components -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
+        <!--<li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>-->
 
-        <li class="menu-item">
-            <a href="#" class="menu-link">
+
+        <li {% if app.request.attributes.get('_route') == 'app_users_admin' %} class="menu-item active" {% else %} class="menu-item" {% endif %} class="menu-item active">
+            <a href="{{ path('app_users_admin') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-crown"></i>
-                <div data-i18n="Boxicons">Boxicons</div>
+                <div data-i18n="Boxicons">Users</div>
             </a>
         </li>
 
-        <!-- Forms & Tables -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Forms &amp; Tables</span></li>
-        <!-- Forms -->
+
+
+
+
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Form Elements">Form Elements</div>
+                <div data-i18n="back">Gestion Forum</div>
+
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Basic Inputs">Basic Inputs</div>
-                    </a>
+                    <a href="{{path('back')}}" class="menu-link">
+                        <div data-i18n="Basic Inputs">Publications</div> </a>
+                    <a href="{{path('listcom')}}" class="menu-link">
+                        <div data-i18n="Input groups">commentaires </div> </a>
+
                 </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Input groups">Input groups</div>
-                    </a>
-                </li>
+
             </ul>
         </li>
+
+
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Form Layouts">Form Layouts</div>
+
+                <div data-i18n="Form Layouts">Gestion Evenement</div>
+
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Vertical Form">Vertical Form</div>
+                    <a href="{{path('app_evenement_index')}}" class="menu-link">
+                        <div data-i18n="Vertical Form">Evenements</div> </a>
+                    <a href="{{path('app_don_index')}}" class="menu-link">
+                        <div data-i18n="Horizontal Form">Dons</div> </a>
+
+                    <a href="{{path('app_association_index')}}" class="menu-link">
+                        <div data-i18n="Horizontal Form">Associations</div>
                     </a>
+
                 </li>
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div data-i18n="Horizontal Form">Horizontal Form</div>
-                    </a>
-                </li>
+
             </ul>
         </li>
+
+
+
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+
+                <div data-i18n="Form Layouts">Gestion Produit</div>
+
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="{{path('app_categories_index')}}" class="menu-link">
+                        <div data-i18n="Input groups">Categorie</div>
+                    </a>
+                    <a href="{{path('app_produits_index')}}" class="menu-link">
+                        <div data-i18n="Basic Inputs">Produit</div>
+                    </a>
+
+                </li>
+
+            </ul>
+        </li>
+
+
+
+
+
+
+
+
+    </ul>
+       
         <!-- Tables -->
-        <li class="menu-item">
-            <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">Tables</div>
-            </a>
-        </li>
+
         <!-- Misc -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
+        <li class="menu-header small text-uppercase"><span class="menu-header-text"></span></li>
         <li class="menu-item">
             <a
                     href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
                     target="_blank"
                     class="menu-link"
             >
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div data-i18n="Support">Support</div>
+               {# <i class="menu-icon tf-icons bx bx-support"></i>  #}
+                <div data-i18n="Support"></div>
             </a>
         </li>
         <li class="menu-item">
@@ -148,9 +183,19 @@
                     target="_blank"
                     class="menu-link"
             >
-                <i class="menu-icon tf-icons bx bx-file"></i>
-                <div data-i18n="Documentation">Documentation</div>
+                {# <i class="menu-icon tf-icons bx bx-file"></i> #}
+                <div data-i18n="Documentation"></div>
             </a>
         </li>
+
+
+
+        <li class="menu-item">
+            <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div data-i18n="Tables">Tables</div>
+            </a>
+        </li>
+        
     </ul>
 </aside>

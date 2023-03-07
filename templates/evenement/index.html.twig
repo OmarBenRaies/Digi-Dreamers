@@ -1,0 +1,93 @@
+
+
+
+{% extends "back/base.html.twig" %}
+
+{% block body %}
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="container-fluid">
+
+
+                <div class="row">
+
+                    <div class="col-12">
+                        <div class="card-box">
+                            <div class="dropdown pull-right">
+                                <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="mdi mdi-dots-vertical"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Another action</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Something else</a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
+                                </div>
+                            </div>
+                            <h4 class="m-t-0 header-title">List Evenement : {{ evenements.getTotalItemCount }}</h4>
+                            <p class="text-muted font-14 m-b-20">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('app_evenement_new') }}">
+                                            <button type="button" class="btn btn-primary">Ajouter Evenement</button>                            </p>
+
+                                        </a>
+
+
+                                    </td>
+                            </table>
+
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>Titre</th>
+                                    <th>Date</th>
+                                    <th>Lieu</th>
+                                    <th>Nbr participant</th>
+
+
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for p in  evenements %}
+                                    <tr>
+                                        <td>{{ p.titre }}</td>
+                                        <td>{{ p.date|date('d/m/Y') }}</td>
+                                        <td>{{ p.lieu }}</td>
+                                        <td>{{ p.getNbrParticipant() }}</td>
+
+                                        <td><a href={{ path('app_evenement_show',{'id':p.id })}}><button class="btn btn-dark">Show </button> </a></td>
+
+                                        <td><a href={{ path('app_evenement_edit',{'id':p.id })}}><button class="btn btn-success">Modifier </button></a></td>
+
+                                        <td><a href={{ path('app_evenement_delete',{'id':p.id })}} onclick="return confirm('Etes vous sûr de supprimer {{ p.titre() }}');"
+                                            > <button class="btn btn-danger"> Supp </button> </a> </td>
+                                                 
+
+                                    </tr>
+
+
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            {{ knp_pagination_render(evenements) }}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

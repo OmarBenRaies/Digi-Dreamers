@@ -1,3 +1,5 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,6 +9,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/logo/logo.png') }}">
 
+         <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/slicknav.css') }}">
@@ -19,6 +26,25 @@
         <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/forummain.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/variablesforum.css') }}">
+        <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css') }} ">
+        <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }} ">
+        <link rel="stylesheet" href="{{asset('assets/vendor/swiper/swiper-bundle.min.css') }} ">
+        <link rel="stylesheet" href="{{asset('assets/vendor/glightbox/css/glightbox.min.css') }} ">
+        <link rel="stylesheet" href="{{asset('assets/vendor/aos/aos.css') }} ">
+        <link rel="stylesheet" href="{{asset('assets/css/variables.css') }} ">
+        <link rel="stylesheet" href="{{asset('assets/css/main.css') }} ">
+          <link href="assets/css/variables.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/font-awesome-line-awesome/css/all.min.css" integrity="sha512-dC0G5HMA6hLr/E1TM623RN6qK+sL8sz5vB+Uc68J7cBon68bMfKcvbkg6OqlfGHo1nMmcCxO5AinnRTDhWbWsA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css" integrity="sha512-vebUliqxrVkBy3gucMhClmyQP9On/HAWQdKDXRaAlb/FKuTbxkjPKUyqVOxAcGwFDka79eTF+YXwfke1h3/wfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+              integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+              crossorigin=""/>
         {% block stylesheets %}
 
         {% endblock %}
@@ -37,21 +63,157 @@
         </div>
     </div>
 
-    {% include 'front/header.html.twig' %}
+   
 
+
+<header>
+    <div class="header-area">
+        <div class="header-top d-none d-sm-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="d-flex justify-content-between flex-wrap align-items-center">
+                            <div class="header-info-left">
+                                <ul>
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">Privacy</a></li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Careers</a></li>
+                                </ul>
+                            </div>
+                            <div class="header-info-right d-flex">
+                                <ul class="order-list">
+                                    <li><a href="#">My Wishlist</a></li>
+                                    <li><a href="#">Track Your Order</a></li>
+                                </ul>
+                                <ul class="header-social">
+                                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                                    <li> <a href="#"><i class="fab fa-instagram"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    <li> <a href="#"><i class="fab fa-youtube"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-mid header-sticky">
+            <div class="container">
+                <div class="menu-wrapper">
+
+                    <div class="logo">
+                        <a href="#"><img style="height: 48px;width: 48px;" src="{{ asset('assets/img/logo/logo.png') }}" alt=""></a>
+                    </div>
+
+                    <div class="main-menu d-none d-lg-block">
+                 
+                        <nav>
+                        
+                            <ul id="navigation">
+                                <li><a href="{{path('app_home')}}">Home</a></li>
+                                 <li><a href="#">Categories <i class="fas fa-angle-down"></i></a>
+                                       
+                                    <ul class="submenu">
+                                        {% block nav %}
+                                        <li><a href="{{path('app_categories_showPro',{'id':1})}}">Visage</a></li>
+                                        <li><a href="#">Corps</a></li>
+                                        <li><a href="#">Cheveux</a></li>
+                                        <li><a href="#">Hygiéne</a></li>
+                                         {% endblock %}
+                                    </ul>
+                                    
+                                </li>
+                                <li><a href="{{path('app_produits_indexFront')}}">Produit</a></li>
+                                <li><a href="{{path('app_evenement_index2')}}">Evenements</a>                                                           
+                                </li>
+                                <li><a href="#">Forum</a>
+
+                                        <ul class="submenu">
+                                        <li><a href="{{path('listpub')}}">Liste des publications</a></li>
+                                        <li><a href="{{path('ajoutpub')}}">Ajouter une publication</a></li>
+                                        
+                                        
+                                         
+                                    </ul>
+                                      
+                                    </ul>
+                                </li>
+                            </ul>
+                             
+                        </nav>
+                      
+                    </div>
+
+                    <div class="header-right">
+
+                        <ul>
+
+                            <li>
+                                <div class="nav-search search-switch hearer_icon">
+                                    <a id="search_1" href="javascript:void(0)">
+                                        <span class="flaticon-search"></span>
+                                    </a>
+                                </div>
+                            </li>
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <li>
+                                    <a style="font-size: 24px;cursor: pointer;padding: 31px 13px;font-weight: 400" href="#">
+                                        <img style="width: 50px;height: 50px;border-radius: 50%;" src="{{ asset('uploads/users/' ~ app.user.image) }}" alt="logout">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a style="font-size: 24px;cursor: pointer;padding: 31px 13px;font-weight: 400" href="{{ path('app_logout') }}">
+                                        <img style="width: 24px;height: 24px;" src="{{ asset('assets/img/icon/logout.png') }}" alt="logout">
+                                    </a>
+                                </li>
+
+                            {% else %}
+                                <li> <a href="{{ path('app_login') }}"><span class="flaticon-user"></span></a></li>
+                            {% endif %}
+
+                        </ul>
+                    </div>
+                    
+                 
+
+
+                </div>
+
+                 <div class="search_input" id="search_input_box">
+                    <form id="search-form" class="search-inner d-flex justify-content-between " novalidate="novalidate" method="post" action="#">
+                        <input type="text" class="form-control" id="search_input_field" placeholder="Search Here"/>
+                        <button type="submit" class="btn" type="submit" ></button>
+                        <span class="ti-close" id="close_search" title="Close Search"></span>
+                    </form>
+                </div>
+ <!-- /Search -->
+
+                <div class="col-12">
+                    <div class="mobile_menu d-block d-lg-none"></div>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom text-center">
+            <p>Sale Up To 50% Biggest Discounts. Hurry! Limited Perriod Offer <a href="#" class="browse-btn">Shop
+                    Now</a></p>
+        </div>
+    </div>
+</header>
 
     {% block body %}
 
     {% endblock %}
 
-    {% include 'front/footer.html.twig' %}
-
+    {% block footer %}
+        {% include 'front/footer.html.twig' %}
+    {% endblock %}
 
         <script src="{{ asset('assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
         <script src="{{ asset('assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
         <script src="{{ asset('assets/js/popper.min.js') }}"></script>
         <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-
         <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
         <script src="{{ asset('assets/js/slick.min.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.slicknav.min.js') }}"></script>
@@ -68,11 +230,47 @@
         <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
         <script src="{{ asset('assets/js/mail-script.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.ajaxchimp.min.js') }}"></script>
+        <script src="{{ asset('assets/js/main.js') }}"></script>
 
         <script src="{{ asset('assets/js/plugins.js') }}"></script>
-        <script src="{{ asset('assets/js/main.js') }}"></script>
+        <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
+        <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
+
+                                <script src="{{ asset('assets/js/mainforum.js') }}"></script>
+ 
+   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js" ></script>
+
+
+         
         {% block javascripts %}
 
         {% endblock %}
+
+        <script>
+		$(document).ready(function () {
+$('#search-form').submit(function (event) {
+        event.preventDefault();
+
+var formData = $("#search_input_field").val();
+
+$.ajax({
+url: '{{ path('app_produit_search') }}',
+type: 'POST',
+data: {'search':formData},
+dataType: 'json',
+success: function (data) { // Afficher les résultats de la recherche
+var results = $('#search-results');
+results.empty();
+results.append(data.html);
+}
+});
+
+});
+});
+	</script>
     </body>
 </html>

@@ -1,0 +1,102 @@
+{% extends 'back/base.html.twig' %}
+
+{% block body %}
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+
+        <h4 class="fw-bold py-3 mb-4">
+            <span class="text-muted fw-light">Dashboard /</span> Users
+        </h4>
+
+        <!-- Basic Bootstrap Table -->
+        <div class="card">
+            <h5 class="card-header">Liste des utilisateurs</h5>
+            <div class="table-responsive text-nowrap">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Informations</th>
+                        <th>email et mot de passe</th>
+                        <th>Telephone</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                    {% for user in users %}
+                        {% set hiddenPassword = '' %}
+                        {% for i in 0..user.password|length - 1 %}
+                            {% set hiddenPassword = hiddenPassword ~ '*' %}
+                        {% endfor %}
+                        <tr>
+                            <td>
+
+                                <strong>{{ user.prenom~" "~user.nom }}</strong> {% if user.verified == 1 %} <i style="color: #696cff" class='bx bxs-badge-check' data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="right" data-bs-html="true" title="" data-bs-original-title="verified"></i>  {% endif %}
+                                <div>CIN :{{ user.cin }}</div>
+                            </td>
+                            <td>
+                                <div>{{ user.email }}</div>
+                                <div>password : {{ hiddenPassword }}</div>
+                            </td>
+
+                            <td>
+                                <div>{{ user.telephone }}</div>
+                            </td>
+
+                            <td>
+                                {% if(user.roles[0]=="admin") %}
+                                    <span class="badge bg-label-danger me-1">Admin</span>
+                                {% else %}
+                                    <span class="badge bg-label-primary me-1">User</span>
+                                {% endif %}
+
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{{ path('app_users_update',{'id':user.id}) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                        <button onclick="deleteUser({{ user.id }})" class="dropdown-item" ><i class="bx bx-trash me-1"></i> Delete</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--/ Basic Bootstrap Table -->
+
+
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/sweetalert2@11.js') }}"></script>
+
+    <script>
+        function deleteUser(id) {
+
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#696cff',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `{{ path('app_users_delete') }}?id=${id}`;
+                }
+            })
+        }
+
+    </script>
+
+
+{% endblock %}

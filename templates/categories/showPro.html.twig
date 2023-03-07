@@ -1,0 +1,49 @@
+
+
+{% extends "front/base.html.twig" %}
+
+{% block nav %}
+{% for c in categories %}
+ <li><a href="{{path('app_categories_showPro',{'id':c.id})}}">{{c.getNomCat()}}</a></li>
+ {% endfor %}
+ {% endblock %}
+
+
+{% block body %}
+<div class="container">
+               
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-one" role="tabpanel" aria-labelledby="nav-one-tab">
+
+                        <div class="latest-items-active">
+                             {% for p in produits %}
+                            <div class="properties pb-30">
+                                <div class="properties-card">
+                                    <div class="properties-img">
+                                        <a href="pro-details.html"><img src="{{ asset('uploads/produit_image/')~p.getImage() }}" alt="" style="width:180px ; height:160px"></a>
+                                        <div class="socal_icon">
+                                            <a href="#"><i class="ti-shopping-cart"></i></a>
+                                            <a href="#"><i class="ti-heart"></i></a>
+                                            <a href="#"><i class="ti-zoom-in"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="properties-caption properties-caption2">
+                                        <p>{{p.Description}}
+                                    </p>
+                                        <div class="properties-footer">
+                                            <div class="price">
+                                                <p>{{p.Prix ~" TND"}}
+                                    </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                             {% endfor %}
+                        </div>
+                        
+                        </div>
+                    </div>
+                    
+                </div>
+                {% endblock  %}

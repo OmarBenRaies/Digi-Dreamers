@@ -1,0 +1,34 @@
+{% extends "front/base.html.twig" %}
+
+{% block nav %}
+{% for c in categories %}
+ <li><a href="{{path('app_categories_showPro',{'id':c.id})}}">{{c.getNomCat()}}</a></li>
+ {% endfor %}
+ {% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+     <script>
+        $(document).ready(function () {
+          
+            $('input[name="search"]').on('input', function () {
+
+           
+                $(this).closest('form').submit();
+
+         
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+
+                        <div id="search-results">
+                         {{ include('produits/_produits_items.html.twig')}}
+                      <button class="btn btn-primary">{{ knp_pagination_render(produits) }}</button> 
+                        
+                        </div>
+                    
+                {% endblock  %}

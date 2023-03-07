@@ -1,0 +1,54 @@
+
+<h1>Association</h1>
+
+<section class="home-blog">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="cl-xl-7 col-lg-8 col-md-10">
+
+                <div class="section-tittle text-center mb-40">
+                    <h2>{{Nom}}</h2>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+        {% set s=0 %}
+        {% for p in Dons %}
+
+            {% set s =s+ p.somme %}
+
+        <table class="table-border-bottom-0">
+            <tr>
+                <td>
+                    <div class="blogs-cap">
+
+                        <span>{{ p.somme ~'  DT' }}</span><h5>{{ p.evenement.titre }}</h5>
+
+
+
+                    </div>
+                </td>
+
+            </tr>
+
+
+        </table>
+        {% endfor %}
+        <h2>{{'Le total des dons : ' ~ s ~'  DT'}}</h2>
+    </div>
+
+
+
+
+    </div>
+</section>
+
+
+
+
+
+
