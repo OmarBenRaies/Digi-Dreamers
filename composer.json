@@ -39,6 +39,7 @@
         "symfony/runtime": "^6.2",
         "symfony/security-bundle": "5.4.*",
         "symfony/security-core": "5.4.*",
+        "symfony/sendinblue-mailer": "5.4.*",
         "symfony/serializer": "5.4.*",
         "symfony/string": "5.4.*",
         "symfony/translation": "5.4.*",

@@ -146,7 +146,7 @@
                       
                     </div>
 
-                    <div class="header-right">
+                   {# <div class="header-right">
 
                         <ul>
 
@@ -174,7 +174,32 @@
                             {% endif %}
 
                         </ul>
+                    </div>  #}
+                    
+                    <div class="header-right">
+
+                    <div class="header-right">
+
+                        <ul>
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <li>
+                                    <a style="font-size: 24px;cursor: pointer;padding: 31px 13px;font-weight: 400" href="{{ path('app_profile') }}">
+                                        <img style="width: 50px;height: 50px;border-radius: 50%;" src="{{ asset('uploads/users/' ~ app.user.image) }}" alt="logout">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a style="font-size: 24px;cursor: pointer;padding: 31px 13px;font-weight: 400" href="{{ path('app_logout') }}">
+                                        <img style="width: 24px;height: 24px;" src="{{ asset('assets/img/icon/logout.png') }}" alt="logout">
+                                    </a>
+                                </li>
+
+                            {% else %}
+                                <li> <a href="{{ path('app_login') }}"><span class="flaticon-user"></span></a></li>
+                            {% endif %}
+
+                        </ul>
                     </div>
+                </div>
                     
                  
 
