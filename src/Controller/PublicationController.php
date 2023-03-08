@@ -14,6 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
 use App\Repository\PublicationRepository;
 use App\Services\QrcodeService;
+use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +26,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\Component\Notifier\Notification\Notification;
+use Symfony\Component\Notifier\NotifierInterface;
 use Symfony\UX\Chartjs\Model\Chart;
 
 
@@ -65,25 +68,32 @@ public function list3(ManagerRegistry $doctrine): Response
 
 
 #[Route('/ajoutpub',name:'ajoutpub')]
-    public function add2 (HttpFoundationRequest $request,ManagerRegistry $doctrine, SluggerInterface $slugger): Response
+    public function add2 (HttpFoundationRequest $request,ManagerRegistry $doctrine, SluggerInterface $slugger,NotifierInterface $notifier,EntityManagerInterface $em): Response
     {
         $repository= $doctrine->getRepository(Publication::class);
         $publications=$repository->findAll();
-        $publication=new Publication;
+        $publication=new Publication();
         $form=$this->createForm(PublicationType::class,$publication);
         $publication->setAllDay(1); 
         $publication->setBackgroundColor("#5c9665");
         $publication->setTextColor("#000000");
         $publication->setBorderColor("#F9ED69");
         $form->handleRequest($request);
+        $myDictionary = array(
+            "louz", "kloub", "homs","bondok",
+            
+            "kakawia"
+        );
+        dump($request);
+
+
+
        // if ($form->isSubmitted())
-        {
-            //$date = new \DateTime('@',strtotime('now'));
-            $em=$doctrine->getManager();
-            $em->persist($publication);
+       
     {
         
         if ($form->isSubmitted() && $form->isValid()) {
+           
             /** @var UploadedFile $brochureFile */
             $UrlImagePub = $form->get('UrlImagePub')->getData();
 
@@ -109,16 +119,28 @@ public function list3(ManagerRegistry $doctrine): Response
                 // instead of its contents
                 $publication->setUrlImagePub($newFilename);
             }
-
+            $myText = $request->get("publication")['contenupub'];
+            
+            $badwords = new PhpBadWordsController();
+            $badwords->setDictionaryFromArray($myDictionary)
+                ->setText($myText);
+            $check = $badwords->check();
+            dump($check);
+            if ($check){
+            $notifier->send(new Notification('Mauvais mot ', ['browser']));} 
+                else {
+                    $entityManager = $this->getdoctrine()->getManager();
+                $entityManager->persist($publication);
             $em->flush();
             return $this->redirectToRoute('listpub');
         }
+    }
         return $this->renderForm('publication/addpub.html.twig',['formP'=>$form,'publication' => $publications]);
     }
  
-    }  
-
+    
     }
+
 
 #[Route('/listpub', name: 'listpub')]
 public function list(ManagerRegistry $doctrine,Request $request,PaginatorInterface $paginator,): Response

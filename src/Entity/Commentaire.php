@@ -20,7 +20,7 @@ class Commentaire
 
     #[ORM\Column(length: 255)]
     #[Assert\Length(min:4,minMessage:"too short!")]
-    #[Assert\Length(max:60,maxMessage: "Too long!")]
+    #[Assert\Length(max:75,maxMessage: "Too long!")]
 
     private ?string $ContenuComm = null;
 

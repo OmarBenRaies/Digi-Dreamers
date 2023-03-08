@@ -29,7 +29,7 @@ class Publication
 
     #[ORM\Column(length: 255)]
     #[Assert\Length(min:4,minMessage: "Title is too short!")]
-    #[Assert\Length(max:20,maxMessage: "Title is too long!")]
+    #[Assert\Length(max:40,maxMessage: "Title is too long!")]
 
     private ?string $CodePub = null;
 
