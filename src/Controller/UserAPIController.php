@@ -10,6 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -100,6 +103,7 @@ class UserAPIController extends AbstractController
         $defaultImagePath = $this->getParameter('kernel.project_dir') . '/public/uploads/users/default-image.jpg';
         $imageFile = new File($defaultImagePath);
         $user->setImageFile($imageFile);
+
         $user->setImage('default-image.jpg');
         $user->setRoles(['ROLE_USER']);
         $user->setVerified(1);
@@ -113,6 +117,68 @@ class UserAPIController extends AbstractController
         ]);
     }
 
+    #[Route('/api/sendVerificationCode/{email}',name: 'api_sendVerificationCode')]
+    public function sendVerificationCode(string $email,UserRepository $userRepository,ManagerRegistry $doctrine){
+
+        $verificationCode =rand(100000,1000000); //generer le code de verification composé de 6 chiffres
+        $em = $doctrine->getManager();
+        $user = $userRepository->findOneBy(['email' => $email]); //recuperer l'utilisateur avec l'email
+
+
+        $user->setVerificationCode($verificationCode); //modifier le code dans la base
+
+        //fixing imageFile error
+        $ImagePath = $this->getParameter('kernel.project_dir') . '/public/uploads/users/'.$user->getImage();
+        $imageFile = new File($ImagePath);
+        $user->setImageFile($imageFile);
+        $em->flush();
+
+        //envoyer le code de verifiaction par mail
+        $transport = Transport::fromDsn('smtp://nour.benabderrahmen@esprit-tn.com:Nba26042001@smtp.office365.com:587');
+        $mailer = new Mailer($transport);
+        $mail = (new Email());
+        $mail->from('nour.benabderrahmen@esprit-tn.com');
+        $mail->to($email);
+        $mail->subject('Activate account code');
+        $mail->html("<div>Voici le code d'activation de votre compte : ".$verificationCode." </div>");
+        $mailer->send($mail);
+
+        return $this->json(['status'=> 'success','message' => 'Email sent Successfully']);
+
+
+
+    }
+
+    #[Route('/api/verifyCode/{email}/{code}',name: 'api_verifyCode')]
+    public function verifyCode(string $email,string $code,UserRepository $userRepository,ManagerRegistry $doctrine){
+
+        $em = $doctrine->getManager();
+        $user = $userRepository->findOneBy(['email' => $email]);
+
+        //verifier le code envoyé est correct ou pas
+        if($user->getVerificationCode()==$code){
+            //fixing imageFile error
+            $ImagePath = $this->getParameter('kernel.project_dir') . '/public/uploads/users/'.$user->getImage();
+            $imageFile = new File($ImagePath);
+            $user->setImageFile($imageFile);
+
+            //si le code est coorect ,le compte sera verifié
+            $user->setVerified(1);
+            $em->flush();
+
+            return $this->json(['status'=> 'success','message' => 'account verified successfully']);
+        }
+
+        return $this->json(['status'=> 'error','message' => 'incorrect code,try again']);
+
+
+
+
+
+
+
+
+    }
 
 
 }

@@ -69,6 +69,7 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface, \Seriali
     private $roles = [];
 
     #[ORM\Column]
+    #[Groups("users")]
     private ?int $verified = null;
 
     #[ORM\Column]
