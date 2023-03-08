@@ -46,7 +46,7 @@ class PublicationController extends AbstractController
     }
 
 
-    #[Route('/back', name: 'back')]
+    #[Route('/backi', name: 'back')]
 public function list2(ManagerRegistry $doctrine): Response
 {
     $repository= $doctrine->getRepository(Publication::class);
