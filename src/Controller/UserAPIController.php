@@ -107,6 +107,7 @@ class UserAPIController extends AbstractController
         $user->setImage('default-image.jpg');
         $user->setRoles(['ROLE_USER']);
         $user->setVerified(1);
+        $user->setVerificationCode(“”);
 
         $em->persist($user);
         $em->flush();
